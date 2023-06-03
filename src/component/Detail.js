@@ -182,14 +182,14 @@ export default function Detail() {
   }, [url]);
   const fetchData = async () => {
     try {
-      const response = await axios.get(`${API_URL}/${url}`);
+      const response = await axios.get(`${API_URL}${url}`);
       setProduct(response.data.product);
       setRelatedProducts(response.data.relatedProducts);
     } catch (error) {
       console.error(error);
     }
   };
-  const productUrl = `${API_URL}/product/${product.url}`;
+  const productUrl = `${API_URL}product/${product.url}`;
   const productUrl1 = `https://gearvn.com/products/gvn-titan-i3060ti`;
   const handleAddtocart = () => {
     dispatch(addProduct({ product, quantity }));
@@ -209,7 +209,7 @@ export default function Detail() {
   const getTenkhByMakh = async (makhArray) => {
     const tenkhs = [];
     for (let i = 0; i < makhArray.length; i++) {
-      const response = await axios.get(`${API_URL}/account/${makhArray[i]}`);
+      const response = await axios.get(`${API_URL}account/${makhArray[i]}`);
       tenkhs.push(response.data);
       setIsLoading(false);
     }
@@ -225,7 +225,7 @@ export default function Detail() {
       const masp = product.id;
       const ratingVal = rating;
       const commentVal = comment;
-      await axios.post(`${API_URL}/review/add`, {
+      await axios.post(`${API_URL}review/add`, {
         makh,
         masp,
         danhgia: ratingVal,
@@ -243,7 +243,7 @@ export default function Detail() {
       const makh = user?.makh;
       const masp = product.id;
       console.log(makh);
-      await axios.delete(`${API_URL}/review/delete`, {
+      await axios.delete(`${API_URL}review/delete`, {
         data: {
           makh,
           masp,
@@ -261,7 +261,7 @@ export default function Detail() {
   const sortedReviews = currentUserReview == null ? review : newReviews;
   const getReview = async () => {
     try {
-      const response = await axios.get(`${API_URL}/review/${url}`);
+      const response = await axios.get(`${API_URL}review/${url}`);
       setReview(response.data);
       const currentUserReview = response.data.find(
         (re) => re.makh === user?.makh

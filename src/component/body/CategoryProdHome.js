@@ -46,7 +46,7 @@ function CategoryProdHome() {
   console.log(cateurl);
   const fetchCateProd = async () => {
     try {
-      const response = await axios.get(`${API_URL}/cateprod/pro`);
+      const response = await axios.get(`${API_URL}cateprod/pro`);
       const cateData = response.data;
       const sortedCateData = cateData.sort((a, b) => a.stt - b.stt);
       setCateUrls(sortedCateData);
