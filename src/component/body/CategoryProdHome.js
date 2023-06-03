@@ -12,6 +12,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { animateScroll as scroll } from "react-scroll";
 import Modal from "react-modal";
 import { API_URL } from "../../config";
+
 import Rating from "@mui/material/Rating";
 function CategoryProdHome() {
   const [products, setProducts] = useState([]);
@@ -45,7 +46,7 @@ function CategoryProdHome() {
   console.log(cateurl);
   const fetchCateProd = async () => {
     try {
-      const response = await axios.get(`${API_URL}/cateprod/cc`);
+      const response = await axios.get(`${API_URL}/cateprod/pro`);
       const cateData = response.data;
       const sortedCateData = cateData.sort((a, b) => a.stt - b.stt);
       setCateUrls(sortedCateData);
