@@ -28,7 +28,7 @@ export default function Account() {
     const getProductsByMasp = async (maspArray) => {
         const products = [];
         for (let i = 0; i < maspArray.length; i++) {
-            const response = await axios.get(`${API_URL}/product/${maspArray[i]}`);
+            const response = await axios.get(`${API_URL}product/${maspArray[i]}`);
             products.push(response.data);
         }
         return products;

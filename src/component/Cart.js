@@ -78,7 +78,7 @@ export default function Cart() {
         try {
             const makh = user.makh
             const quantity = quantitycheck == 0 ? 1 : quantitycheck
-            const res = await axios.patch(`${API_URL}/cart`, {
+            const res = await axios.patch(`${API_URL}cart`, {
                 makh,
                 masp,
                 quantity,
