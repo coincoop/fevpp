@@ -1,2 +1,2 @@
 // config.js
-export const API_URL = "http://localhost:5000";
+export const API_URL = process.env.PORT || 'http://localhost:5000';
