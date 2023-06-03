@@ -46,7 +46,7 @@ export default function SlideHeader() {
     fetchHome();
   }, []);
   const fetchHome = async () => {
-    const response = await axios.get(`${API_URL}/home/status`);
+    const response = await axios.get(`${API_URL}home/status`);
     setImg1(response.data.img1);
     setImg2(response.data.img2);
     setImg3(response.data.img3);

@@ -104,7 +104,7 @@ export default function Header() {
   useEffect(() => {
     const getUserCart = async () => {
       let userId = user?.makh;
-      const response = await axios.get(`${API_URL}/cart/${userId}`);
+      const response = await axios.get(`${API_URL}cart/${userId}`);
       setUserCart(response.data);
     };
     getUserCart();
@@ -137,15 +137,15 @@ export default function Header() {
     return () => window.removeEventListener("resize", updateClass);
   }, []);
   const getProducts = async () => {
-    const response = await axios.get(`${API_URL}/product`);
+    const response = await axios.get(`${API_URL}product`);
     setProducts(response.data.products);
   };
   const fetchMenus = async () => {
-    const response = await axios.get(`${API_URL}/`);
+    const response = await axios.get(`${API_URL}`);
     setMenus(response.data);
   };
   const fetchHome = async () => {
-    const response = await axios.get(`${API_URL}/home/status`);
+    const response = await axios.get(`${API_URL}home/status`);
     setSdt(response.data.sdt);
     setImgHead(response.data.imghead);
     setName(response.data.ten);

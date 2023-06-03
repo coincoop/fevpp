@@ -7,7 +7,7 @@ export default function PolicyBody() {
 
   useEffect(() => {
     const fetchHome = async () => {
-      const response = await axios.get(`${API_URL}/home/status`);
+      const response = await axios.get(`${API_URL}home/status`);
       setMota(response.data.mota);
     };
     fetchHome();

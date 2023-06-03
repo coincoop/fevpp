@@ -19,7 +19,7 @@ export default function Detail() {
   }, []);
   const [review, setReview] = useState([]);
   const getProduct = async () => {
-    const response = await axios.get(`${API_URL}/product`);
+    const response = await axios.get(`${API_URL}product`);
     setProduct(response.data.products);
 setReview(response.data);
   };

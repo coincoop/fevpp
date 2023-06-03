@@ -20,7 +20,7 @@ export default function Footer() {
   const [motaFooter, setMotaFooter] = useState("");
   useEffect(() => {
     const fetchHome = async () => {
-      const response = await axios.get(`${API_URL}/home/status`);
+      const response = await axios.get(`${API_URL}home/status`);
       setSdt(response.data.sdt);
       setDiachi(response.data.diachi);
       setGmail(response.data.gmail);

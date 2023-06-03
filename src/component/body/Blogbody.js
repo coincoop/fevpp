@@ -16,7 +16,7 @@ export default function Blogbody() {
   }, []);
 
   const getBlog = async () => {
-    const response = await axios.get(`${API_URL}/blog/all`);
+    const response = await axios.get(`${API_URL}blog/all`);
     setBlog(response.data);
   };
   const settings = {

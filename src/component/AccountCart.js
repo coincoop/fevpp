@@ -18,7 +18,7 @@ export default function Account() {
 
     const getUserCart = async () => {
         let userId = user.makh;
-        const response = await axios.get(`${API_URL}/cart/${userId}`);
+        const response = await axios.get(`${API_URL}cart/${userId}`);
         setUserCart(response.data);
         const maspArray = response.data.map((item) => item.masp);
         const products = await getProductsByMasp(maspArray);

@@ -19,7 +19,7 @@ export default function Cart() {
 
     const getUserCart = async () => {
         let userId = user.makh;
-        const response = await axios.get(`${API_URL}/cart/${userId}`);
+        const response = await axios.get(`${API_URL}cart/${userId}`);
         setUserCart(response.data);
         const maspArray = response.data.map((item) => item.masp);
         const products = await getProductsByMakh(maspArray);
@@ -29,7 +29,7 @@ export default function Cart() {
     const getProductsByMakh = async (maspArray) => {
         const products = [];
         for (let i = 0; i < maspArray.length; i++) {
-            const response = await axios.get(`${API_URL}/product/${maspArray[i]}`);
+            const response = await axios.get(`${API_URL}product/${maspArray[i]}`);
             products.push(response.data);
         }
         return products;
@@ -37,7 +37,7 @@ export default function Cart() {
 
     const deleteProduct = async (masp, makh) => {
         try {
-            await axios.delete(`${API_URL}/cart/${masp}/${makh}`);
+            await axios.delete(`${API_URL}cart/${masp}/${makh}`);
             await getUserCart();
         } catch (error) {
             console.log(error);
@@ -53,7 +53,7 @@ export default function Cart() {
     const handleDeleteMultiple = async () => {
         try {
             const makh = user.makh;
-            const res = await axios.delete(`${API_URL}/cart`, {
+            const res = await axios.delete(`${API_URL}cart`, {
                 data: { masp: selectedIds, makh },
             });
             await getUserCart();

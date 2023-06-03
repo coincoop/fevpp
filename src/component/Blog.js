@@ -14,7 +14,7 @@ export default function Blog() {
 
   const getBlogs = async () => {
     try {
-      const response = await axios.get(`${API_URL}/blog/${url}`);
+      const response = await axios.get(`${API_URL}blog/${url}`);
       setBlogs(response.data);
       setMota(response.data.mota)
     } catch (error) {

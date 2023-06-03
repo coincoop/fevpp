@@ -36,7 +36,7 @@ function CategoryPage() {
   useEffect(() => {
     const fetchProducts = async () => {
       const response = await axios.get(
-        `${API_URL}/categories/${url}`
+        `${API_URL}categories/${url}`
       );
       setName(response.data.name);
       setProducts(response.data.products);

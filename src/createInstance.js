@@ -1,12 +1,12 @@
 import axios from "axios";
 import jwt_decode from 'jwt-decode'
-
+import { API_URL } from "./config";
 
 
 //maux
 const refreshToken = async () => {
     try {
-        await axios.post('http://localhost:5000/account/refresh', {
+        await axios.post(`${API_URL}account/refresh`, {
             withCredentials: true,
         })
     } catch (e) {

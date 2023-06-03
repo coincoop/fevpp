@@ -28,7 +28,7 @@ export default function Product() {
   }, [maxPrice]);
 
   const getProduct = async () => {
-    const response = await axios.get(`${API_URL}/product`);
+    const response = await axios.get(`${API_URL}product`);
     setProduct(response.data.products);
     setReview(response.data);
     const prices = response.data.products.map((p) => p.dongia);

@@ -27,7 +27,7 @@ function CategorySale() {
     fetchProducts();
   }, []);
   const fetchProducts = async () => {
-    const response = await axios.get(`${API_URL}/products/productsale`);
+    const response = await axios.get(`${API_URL}products/productsale`);
     setReview(response.data);
     setProductSale(response.data.products);
   };

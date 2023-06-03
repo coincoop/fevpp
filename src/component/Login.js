@@ -27,13 +27,13 @@ export default function Login() {
           matkhau: matkhau,
         };
     try {
-      const res = await axios.post(`${API_URL}/account/login`, newUser);
+      const res = await axios.post(`${API_URL}account/login`, newUser);
   
       const cart = store.getState().cart.cart;
       if (cart) {
         const masp = cart.map((item) => item.id);
         const quantity = cart.map((item) => item.quantity);
-        await axios.post(`${API_URL}/cart/addmulti`, {
+        await axios.post(`${API_URL}cart/addmulti`, {
           quantity: quantity,
           makh: res.data.makh,
           masp: masp,

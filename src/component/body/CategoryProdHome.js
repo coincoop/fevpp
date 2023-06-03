@@ -28,7 +28,7 @@ function CategoryProdHome() {
 
   const fetchProducts = async (cateUrl) => {
     try {
-      const response = await axios.get(`${API_URL}/categories/${cateUrl}`);
+      const response = await axios.get(`${API_URL}categories/${cateUrl}`);
       const categoryProduct = {
         cateUrl: cateUrl,
         name: response.data.name,

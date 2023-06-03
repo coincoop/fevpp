@@ -13,7 +13,7 @@ function SearchResults() {
         fetchProducts();
     }, [searchText]);
     const fetchProducts = async () => {
-        const response = await axios.get(`${API_URL}/product`)
+        const response = await axios.get(`${API_URL}product`)
         setProducts(response.data.products);
       
     };

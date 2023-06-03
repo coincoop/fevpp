@@ -16,7 +16,7 @@ export default function Contact() {
     fetchContact();
   }, []);
   const fetchContact = async () => {
-    const response = await axios.get(`${API_URL}/contact/status`);
+    const response = await axios.get(`${API_URL}contact/status`);
     setSdt(response.data.sdt);
     setMota(response.data.mota);
     setDiachi(response.data.diachi);

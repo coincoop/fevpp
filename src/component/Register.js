@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import "../css/login.css";
-
+import { API_URL } from "../config";
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from "react-redux";
 import { registerUser } from '../redux/apiRequest.js';
@@ -38,7 +38,7 @@ export default function Register() {
         };
 
         try {
-            await axios.post('http://localhost:5000/account/register', newUser);
+            await axios.post(`${API_URL}account/register`, newUser);
             dispatch(registerSuccess());
             navigate('/account/login');
         } catch (error) {

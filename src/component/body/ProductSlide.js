@@ -17,7 +17,7 @@ const ProductSlide = () => {
 
   useEffect(() => {
     const fetchProduct = async () => {
-      const response = await axios.get(`${API_URL}/product`);
+      const response = await axios.get(`${API_URL}product`);
       setProducts(response.data.products);
     };
     fetchProduct();
