@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { API_URL } from "../../config";
+import "../../css/policyBody.css";
 import axios from "axios";
 
 export default function PolicyBody() {
@@ -13,8 +14,8 @@ export default function PolicyBody() {
     fetchHome();
   }, []);
   return (
-    <div className="container">
-      <div style={{margin: "40px"}} dangerouslySetInnerHTML={{ __html: mota }} />
+    <div className="container policy">
+      <div style={{margin: "40px", width: "100%"}} dangerouslySetInnerHTML={{ __html: mota }} />
     </div>
   );
 }
