@@ -15,7 +15,7 @@ export default function PolicyBody() {
   }, []);
   return (
     <div className="container policy">
-      <div style={{margin: "40px", width: "100%"}} dangerouslySetInnerHTML={{ __html: mota }} />
+      <div style={{marginTop: "40px", width: "100%"}} dangerouslySetInnerHTML={{ __html: mota }} />
     </div>
   );
 }
