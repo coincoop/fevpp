@@ -414,7 +414,7 @@ function CategoryPage() {
                   )}
                 </div>
                 <div class="price-product">
-                  {product.giacu && product.giacu !== 0 ? (
+                  {product.giacu && product.giacu === 0 && product.giacu !== 'NULL'? (
                     <div style={{ fontSize: "15px" }}>
                       <del>
                         <Currency value={product.giacu} />
