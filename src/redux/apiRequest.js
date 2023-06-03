@@ -12,7 +12,7 @@ import store from './store';
 export const loginUser = async (user, dispatch, navigate) => {
     dispatch(loginStart());
     try {
-      const res = await axios.post('http://localhost:5000/account/login', user);
+      const res = await axios.post(`${API_URL}account/login`, user);
   
       const cart = store.getState().cart.cart;
       if (cart) {
@@ -51,7 +51,7 @@ export const loginUser = async (user, dispatch, navigate) => {
 export const registerUser = async (user, dispatch,navigate) => {
     dispatch(registerStart());
     try {
-        await axios.post('http://localhost:5000/account/register',user);
+        await axios.post(`${API_URL}account/register`,user);
         dispatch(registerSuccess());
        
         navigate('/account/login');
@@ -63,7 +63,7 @@ export const registerUser = async (user, dispatch,navigate) => {
 export const logoutUser = async ( dispatch,id,navigate,accessToken,axiosJWT) => {
     dispatch(logoutStart());
     try {
-        await axiosJWT.post('http://localhost:5000/account/logout',id,{
+        await axiosJWT.post(`${API_URL}account/logout`,id,{
             headers: {token: accessToken}
         });
         dispatch(logoutSuccess());
@@ -76,7 +76,7 @@ export const logoutUser = async ( dispatch,id,navigate,accessToken,axiosJWT) => 
 
 export const addToCart = async (newCart) => {
     try {
-      const response = await axios.post('http://localhost:5000/cart/add', newCart);
+      const response = await axios.post(`${API_URL}cart/add`, newCart);
       return response.data;
     } catch (error) {
         console.log(error);
