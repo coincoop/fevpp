@@ -18,7 +18,7 @@ export const loginUser = async (user, dispatch, navigate) => {
       if (cart) {
         const masp = cart.map((item) => item.id);
         const quantity = cart.map((item) => item.quantity);
-        await axios.post(`${API_URL}/cart/addmulti`, {
+        await axios.post(`${API_URL}cart/addmulti`, {
           quantity: quantity,
           makh: res.data.makh,
           masp: masp,
