@@ -26,7 +26,7 @@ const EditBlog = () => {
     formData.append("url", url);
     console.log(formData);
     try {
-      await axios.patch(`http://localhost:5000/blog/${id}`, formData, {
+      await axios.patch(`${API_URL}blog/${id}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -39,7 +39,7 @@ const EditBlog = () => {
   };
 
   const getBlogById = async () => {
-    const response = await axios.get(`http://localhost:5000/admin/blog/${id}`);
+    const response = await axios.get(`${API_URL}admin/blog/${id}`);
     console.log(response.data);
     setTenBlog(response.data.tenblog);
     setMota(response.data.mota);

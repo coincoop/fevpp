@@ -23,7 +23,7 @@ const EditCateProd = () => {
     formData.append("url", url);
     console.log(formData);
     try {
-      await axios.patch(`http://localhost:5000/admin/cateProd/${id}`, formData, {
+      await axios.patch(`${API_URL}admin/cateProd/${id}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -36,7 +36,7 @@ const EditCateProd = () => {
   };
 
   const getCateProdById = async () => {
-    const response = await axios.get(`http://localhost:5000/admin/cateProd/${id}`);
+    const response = await axios.get(`${API_URL}admin/cateProd/${id}`);
     
     setTen(response.data.ten);
     setStt(response.data.stt);

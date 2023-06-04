@@ -25,7 +25,7 @@ const AddContact = () => {
     formData.append("map", map);
     formData.append("url", url);
     try {
-      await axios.post("http://localhost:5000/admin/contact", formData, {
+      await axios.post(`${API_URL}admin/contact`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

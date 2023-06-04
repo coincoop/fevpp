@@ -13,7 +13,7 @@ const ListContact = () => {
 
   const getContact = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/admin/contact");
+      const response = await axios.get(`${API_URL}admin/contact`);
       setContact(response.data);
     } catch (error) {
       console.log(error);
@@ -22,7 +22,7 @@ const ListContact = () => {
 
   const deleteContact = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/admin/contact/${id}`);
+      await axios.delete(`${API_URL}admin/contact/${id}`);
       getContact();
     } catch (error) {
       console.log(error);
@@ -32,7 +32,7 @@ const ListContact = () => {
   const updateStatus = async (id, currentStatus) => {
     try {
       const newStatus = currentStatus === 1 ? 0 : 1;
-      await axios.put(`http://localhost:5000/admin/contact/${id}`, {
+      await axios.put(`${API_URL}admin/contact/${id}`, {
         status: newStatus,
       });
       getContact();

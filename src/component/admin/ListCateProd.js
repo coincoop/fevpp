@@ -37,7 +37,7 @@ const ListCateProd = () => {
 
   const getCateProd = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/admin/cateProd");
+      const response = await axios.get(`${API_URL}admin/cateProd`);
       const sortedData = response.data.sort((a, b) => a.stt - b.stt);
       setCateProd(sortedData);
     } catch (error) {
@@ -47,7 +47,7 @@ const ListCateProd = () => {
 
   const deleteCateProd = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/admin/cateProd/${id}`);
+      await axios.delete(`${API_URL}admin/cateProd/${id}`);
       getCateProd();
     } catch (error) {
       console.log(error);
@@ -56,7 +56,7 @@ const ListCateProd = () => {
 
   const updateCateProd = async (data) => {
     try {
-      await axios.patch(`http://localhost:5000/admin/cateProd/${data.id}`, {
+      await axios.patch(`${API_URL}admin/cateProd/${data.id}`, {
         stt: data.stt,
       });
     } catch (error) {

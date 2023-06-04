@@ -12,13 +12,13 @@ const ListBlog = () => {
   }, []);
 
   const getBlog = async () => {
-    const response = await axios.get("http://localhost:5000/admin/blog");
+    const response = await axios.get(`${API_URL}admin/blog`);
     setBlog(response.data);
   };
 
   const deleteBlog = async (id) => {
     try {
-      const check =await axios.delete(`http://localhost:5000/admin/blog/${id}`); 
+      await axios.delete(`${API_URL}admin/blog/${id}`); 
       getBlog();
     } catch (error) {
       console.log(error);

@@ -19,7 +19,7 @@ const AddMenu = () => {
   }, []);
 
   const getMenus = async () => {
-    const response = await axios.get("http://localhost:5000/admin/admenus");
+    const response = await axios.get(`${API_URL}admin/admenus`);
     setMenuList(response.data);
   };
 
@@ -34,7 +34,7 @@ const AddMenu = () => {
       console.log(formData.get("img"));
 
       try {
-        await axios.post("http://localhost:5000/admin/admenus", formData, {
+        await axios.post(`${API_URL}admin/admenus`, formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },

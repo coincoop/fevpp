@@ -16,13 +16,13 @@ const ListProduct = () => {
   }, []);
 
   const getProductsss = async () => {
-    const response = await axios.get(`http://localhost:5000/admin/adproducts`);
+    const response = await axios.get(`${API_URL}admin/adproducts`);
     setProductsss(response.data);
   };
 
   const deleteProduct = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/admin/adproducts/${id}`);
+      await axios.delete(`${API_URL}admin/adproducts/${id}`);
       getProductsss();
     } catch (error) {
       console.log(error);

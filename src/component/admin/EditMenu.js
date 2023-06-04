@@ -34,7 +34,7 @@ const EditMenu = () => {
     console.log(formData.get("img"));
 
     try {
-      await axios.patch(`http://localhost:5000/admin/admenus/${id}`, formData, {
+      await axios.patch(`${API_URL}admin/admenus/${id}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -47,7 +47,7 @@ const EditMenu = () => {
     }
   };
   const getMenuById = async () => {
-    const response = await axios.get(`http://localhost:5000/admin/admenus/${id}`);
+    const response = await axios.get(`${API_URL}admin/admenus/${id}`);
     setName(response.data.name);
     setParentId(response.data.parent_id);
     setImg(response.data.img);

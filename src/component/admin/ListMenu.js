@@ -14,7 +14,7 @@ const ListMenu = () => {
 
   const getMenus = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/admin/admenus");
+      const response = await axios.get(`${API_URL}admin/admenus`);
       setMenus(response.data);
     } catch (error) {
       console.log(error);
@@ -23,7 +23,7 @@ const ListMenu = () => {
 
   const deleteMenu = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/admin/admenus/${id}`);
+      await axios.delete(`${API_URL}admin/admenus/${id}`);
       getMenus();
     } catch (error) {
       console.log(error);

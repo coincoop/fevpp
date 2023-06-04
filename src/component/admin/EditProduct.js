@@ -66,7 +66,7 @@ const EditProduct = () => {
     console.log(formData.get("img"));
     console.log(formData.getAll("img_con"));
     try {
-      await axios.patch(`http://localhost:5000/admin/adproducts/${id}`, formData, {
+      await axios.patch(`${API_URL}admin/adproducts/${id}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -79,7 +79,7 @@ const EditProduct = () => {
   };
 
   const getProductById = async () => {
-    const response = await axios.get(`http://localhost:5000/admin/adproducts/${id}`);
+    const response = await axios.get(`${API_URL}admin/adproducts/${id}`);
     setTensp(response.data.tensp);
     setMota(response.data.mota);
     setMotachinh(response.data.mota_chinh);
@@ -108,7 +108,7 @@ const EditProduct = () => {
     getProductById();
   }, []);
   const getMenus = async () => {
-    const response = await axios.get("http://localhost:5000/menus");
+    const response = await axios.get(`${API_URL}admin/admenus`);
     setMenu1List(response.data);
     setMenu2List(response.data);
   };

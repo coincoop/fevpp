@@ -24,7 +24,7 @@ const EditReview = () => {
     formData.append("noidung", noidung);
     console.log(formData);
     try {
-      await axios.patch(`http://localhost:5000/admin/review/${id}`, formData, {
+      await axios.patch(`${API_URL}admin/review/${id}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -37,7 +37,7 @@ const EditReview = () => {
   };
 
   const getReviewById = async () => {
-    const response = await axios.get(`http://localhost:5000/admin/review/${id}`);
+    const response = await axios.get(`${API_URL}admin/review/${id}`);
     setMasp(response.data.masp);
     setMakh(response.data.makh);
     setDanhgia(response.data.danhgia);

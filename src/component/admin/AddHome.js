@@ -36,7 +36,7 @@ const AddHome = () => {
     formData.append("motaFooter", motaFooter);
     formData.append("ten", ten);
     try {
-      await axios.post("http://localhost:5000/admin/home", formData, {
+      await axios.post(`${API_URL}admin/home`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

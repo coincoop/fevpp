@@ -62,7 +62,7 @@ const AddProduct = () => {
     console.log(formData.get("img"));
     console.log(formData.getAll("img_con"));
     try {
-      await axios.post("http://localhost:5000/admin/adproducts", formData, {
+      await axios.post(`${API_URL}admin/adproducts`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -76,7 +76,7 @@ const AddProduct = () => {
     getMenus();
   }, []);
   const getMenus = async () => {
-    const response = await axios.get("http://localhost:5000/admin/admenus");
+    const response = await axios.get(`${API_URL}admin/admenus`);
     setMenu1List(response.data);
     setMenu2List(response.data);
   };

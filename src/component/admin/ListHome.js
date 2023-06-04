@@ -13,7 +13,7 @@ const ListHome = () => {
 
   const getHome = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/admin/home");
+      const response = await axios.get(`${API_URL}admin/home`);
       setHome(response.data);
     } catch (error) {
       console.log(error);
@@ -22,7 +22,7 @@ const ListHome = () => {
 
   const deleteHome = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/admin/home/${id}`);
+      await axios.delete(`${API_URL}admin/home/${id}`);
       getHome();
     } catch (error) {
       console.log(error);
@@ -32,7 +32,7 @@ const ListHome = () => {
   const updateStatus = async (id, currentStatus) => {
     try {
       const newStatus = currentStatus === 1 ? 0 : 1;
-      await axios.put(`http://localhost:5000/admin/home/${id}`, {
+      await axios.put(`${API_URL}admin/home/${id}`, {
         status: newStatus,
       });
       getHome();

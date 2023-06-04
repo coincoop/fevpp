@@ -45,7 +45,7 @@ const EditHome = () => {
     formData.append("motaFooter", motaFooter);
     formData.append("ten", ten);
     try {
-      await axios.patch(`http://localhost:5000/admin/home/${id}`, formData, {
+      await axios.patch(`${API_URL}admin/home/${id}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -58,7 +58,7 @@ const EditHome = () => {
     }
   };
   const getHomeById = async () => {
-    const response = await axios.get(`http://localhost:5000/admin/home/${id}`);
+    const response = await axios.get(`${API_URL}admin/home/${id}`);
     setImgHead(response.data.imghead);
     setImgFoot(response.data.imgfoot);
     setImg1(response.data.img1);

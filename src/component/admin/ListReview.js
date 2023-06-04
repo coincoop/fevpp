@@ -13,7 +13,7 @@ const ListReview = () => {
 
   const getReview = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/admin/review");
+      const response = await axios.get(`${API_URL}admin/review`);
       setReview(response.data);
     } catch (error) {
       console.log(error);
@@ -22,7 +22,7 @@ const ListReview = () => {
 
   const deleteReview = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/admin/review/${id}`);
+      await axios.delete(`${API_URL}admin/review/${id}`);
       getReview();
     } catch (error) {
       console.log(error);
