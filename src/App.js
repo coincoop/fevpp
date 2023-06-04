@@ -1,5 +1,5 @@
 
-import { BrowserRouter, Routes, Route,Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 // import Product from './component/Product';
 import Footer from './component/Footer';
 import Header from './component/Header';
@@ -18,6 +18,23 @@ import ProductSale from "./component/ProductSale";
 import Contact from "./component/Contact";
 import NotFound from "./component/NotFound";
 
+//Admin
+import AddMenu from "./component/admin/AddMenu";
+import EditMenu from "./component/admin/EditMenu";
+// import MenuList from "./component/admin/MenuList";
+// import ProductList from "./component/admin/ProductList";
+import AddProduct from "./component/admin/AddProduct";
+import EditProduct from "./component/admin/EditProduct";
+import AdLayout from "./component/admin/AdLayout";
+import AddHome from "./component/admin/AddHome";
+import EditHome from "./component/admin/EditHome";
+import AddBlog from "./component/admin/AddBlog";
+import EditBlog from "./component/admin/EditBlog";
+import AddCateProd from "./component/admin/AddCateProd"
+import EditCateProd from "./component/admin/EditCateProd";
+import EditReview from "./component/admin/EditReview";
+import AddContact from "./component/admin/AddContact";
+
 function Layout({ children }) {
   return (
     <>
@@ -35,7 +52,7 @@ function App() {
 
         <Route path="/" element={<Layout><Body /></Layout>} />
         <Route path="/product" element={<Layout><Product /></Layout>} />
-        <Route path="/productsale" element={<Layout><ProductSale/></Layout>} />
+        <Route path="/productsale" element={<Layout><ProductSale /></Layout>} />
         <Route path="/account/login" element={<Layout><Login /></Layout>} />
         <Route path="/account/register" element={<Layout><Register /></Layout>} />
         <Route path="product/:url" element={<Layout><Detail /></Layout>} />
@@ -54,7 +71,23 @@ function App() {
         {/* <Route path="add" element={<AddProduct />} />
           <Route path="/admin/edit/:id" element={<EditProduct />} /> */}
         <Route path="*" element={<Layout><NotFound /></Layout>} />
-
+        <Route path="/admin" element={<AdLayout />}></Route>
+        {/* <Route path="/product" element={<ProductList/>} />
+          <Route path="/menu" element={<MenuList/>} /> */}
+        <Route path="/admin/addmenu" element={<AddMenu />} />
+        <Route path="/admin/addproduct" element={<AddProduct />} />
+        <Route path="/admin/edit/:id" element={<EditMenu />} />
+        <Route path="/admin/editproduct/:id" element={<EditProduct />} />
+        <Route path="/admin/addhome" element={<AddHome />} />
+        <Route path="/admin/edithome/:id" element={<EditHome />} />
+        <Route path="/admin/addContact" element={<AddContact />} />
+        {/* <Route path="/edithome/:id" element={<EditHome />} /> */}
+        <Route path="/admin/addblog" element={<AddBlog />} />
+        <Route path="/admin/editblog/:id" element={<EditBlog />} />
+        <Route path="/admin/addCateProd" element={<AddCateProd />} />
+        <Route path="/admin/editCateProd/:id" element={<EditCateProd />} />
+        {/* <Route path="/addReview" element={<AddReview />} /> */}
+        <Route path="/admin/editReview/:id" element={<EditReview />} />
 
       </Routes>
     </BrowserRouter>

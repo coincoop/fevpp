@@ -167,14 +167,14 @@ h3,
   .service-content {
     display: flex;
     justify-content: flex-start;
-    margin-left: 50px;
+    margin-left: 30px;
   }
 }
 @media (max-width: 500px) {
   .service-content {
     display: flex;
     justify-content: flex-start;
-    margin-left: 80px;
+    margin-left: 60px;
   }
 }
 

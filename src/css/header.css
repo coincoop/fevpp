@@ -964,6 +964,9 @@ form .fieldSearch .search__button.fieldSearch__button,
   .searchrs-contain {
     width: 300px !important;
   }
+  .header__heading-text {
+    min-width: 170px;
+  }
 }
 
 .site-nav__item a:hover {
