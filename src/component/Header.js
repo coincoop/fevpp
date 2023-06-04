@@ -25,6 +25,7 @@ export default function Header() {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [qrCodeSize, setQRCodeSize] = useState(420);
   const [showBackToTop, setShowBackToTop] = useState(false);
+  const [totalUser, setTotalUser] = useState(0);
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => {
@@ -76,9 +77,10 @@ export default function Header() {
   const totalLocal = cart.cart.reduce((acc, cartItem) => {
     return acc + cartItem.dongia * cartItem.quantity;
   }, 0);
-  const totalUser = userCart.reduce((acc, cartItem) => {
-    return acc + cartItem.quantity;
-  }, 0);
+  const getTotalUser = async()=>{
+    const response = await axios.get(`${API_URL}/cart/thanhtien/${user?.makh}`);
+    setTotalUser(response.data);
+  }
   const total = user ? totalUser : totalLocal;
 
   const [searchTerm, setSearchTerm] = useState("");
@@ -107,6 +109,7 @@ export default function Header() {
       const response = await axios.get(`${API_URL}cart/${userId}`);
       setUserCart(response.data);
     };
+    getTotalUser();
     getUserCart();
 
     getProducts();
