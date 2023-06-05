@@ -39,7 +39,12 @@ const AddMenu = () => {
         setLoading(true);
         const uploadResponse = await axios.post(
           `${API_URL}upload/menu`,
-          formData
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
         );
 
         const imgURL = uploadResponse.data.url;
