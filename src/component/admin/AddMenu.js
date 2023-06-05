@@ -5,32 +5,27 @@ import Dropzone from "react-dropzone";
 import "../../css/addmenu.css";
 import unidecode from "unidecode";
 import { API_URL } from "../../config";
+import {
+  ref,
+  uploadBytes,
+  getDownloadURL,
+  listAll,
+  list,
+} from "firebase/storage";
 
+import { storage } from "../../firebase.js";
 const AddMenu = () => {
   const [name, setName] = useState("");
   const [parent_id, setParentId] = useState("");
   const [img, setImg] = useState(null);
+  const [imageUrls, setImageUrls] = useState([]);
   const [url, setUrl] = useState("");
   const [menuList, setMenuList] = useState([]);
   const [errors, setErrors] = useState({});
-  const [res, setRes] = useState({});
+
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const [file, setFile] = useState(null);
-  
-  const handleSelectFile = (e) => setFile(e.target.files[0]);
-  const handleUpload = async () => {
-    try {
-      setLoading(true);
-      const data = new FormData();
-      data.append("img", file);
-      const res = await axios.post(`${API_URL}upload/menu`, data);
-      setRes(res.data);
-    } catch (error) {
-      alert(error.message);
-    } finally {
-      setLoading(false);
-    }}
+
   useEffect(() => {
     getMenus();
   }, []);
@@ -39,6 +34,7 @@ const AddMenu = () => {
     const response = await axios.get(`${API_URL}admin/admenus`);
     setMenuList(response.data);
   };
+
 
   const saveMenu = async (e) => {
     e.preventDefault();
@@ -51,26 +47,25 @@ const AddMenu = () => {
 
       try {
         setLoading(true);
-        // const uploadResponse = await axios.post(
-        //   `${API_URL}upload/menu`,
-        //   formData,
-        //   {
-        //     headers: {
-        //       "Content-Type": "multipart/form-data",
-        //     },
-        //   }
-        // );
+        const imagesListRef = ref(storage, "menu/");
 
-        // const imgURL = uploadResponse.data.url;
+        if (img == null) return;
+        const imageRef = ref(storage, `menu/${img.name}`);
+        uploadBytes(imageRef, img).then((snapshot) => {
+          getDownloadURL(snapshot.ref).then((url) => {
+            setImageUrls((prev) => [...prev, url]);
+          });
+        });
 
-        const response = await axios.post(
+        await axios.post(
           `${API_URL}admin/admenus`,
           {
             name,
             parent_id,
             url,
-            img,
+            img: img.name,
           },
+
           {
             headers: {
               "Content-Type": "multipart/form-data",
@@ -78,7 +73,7 @@ const AddMenu = () => {
           }
         );
 
-        setRes(response.data);
+
         navigate("/admin");
       } catch (error) {
         console.log(error);
@@ -88,8 +83,6 @@ const AddMenu = () => {
       }
     }
   };
-
-
 
   const validateForm = () => {
     const errors = {};
@@ -164,41 +157,9 @@ const AddMenu = () => {
         </div></div>}
       {!loading && (
         <div className="containeradmin">
-
           <div className="row">
             <div className="col-md-6 offset-md-3">
-
               <form onSubmit={saveMenu} encType="multipart/form-data" method="post">
-              <label htmlFor="file" className="btn-grey">
-        {" "}
-        select file
-      </label>
-      {file && <center> {file.name}</center>}
-      <input
-        id="file"
-        type="file"
-        onChange={handleSelectFile}
-        multiple={false}
-      />
-      <code>
-        {Object.keys(res).length > 0
-          ? Object.keys(res).map((key) => (
-              <p className="output-item" key={key}>
-                <span>{key}:</span>
-                <span>
-                  {typeof res[key] === "object" ? "object" : res[key]}
-                </span>
-              </p>
-            ))
-          : null}
-      </code>
-      {file && (
-        <>
-          <button onClick={handleUpload} className="btn-green">
-            {loading ? "uploading..." : "upload to cloudinary"}
-          </button>
-        </>
-      )}
                 <div className="mb-3">
                   <label htmlFor="name" className="form-label">
                     Tên menu

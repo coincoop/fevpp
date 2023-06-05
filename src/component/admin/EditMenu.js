@@ -5,14 +5,23 @@ import Dropzone from "react-dropzone";
 import unidecode from "unidecode";
 import "../../css/addmenu.css";
 import { API_URL } from "../../config";
+import {
+  ref,
+  uploadBytes,
+  getDownloadURL,
+  listAll,
+  list,
+} from "firebase/storage";
 
+import { storage } from "../../firebase.js";
 const EditMenu = () => {
   const [name, setName] = useState("");
   const [parent_id, setParentId] = useState("");
   const [img, setImg] = useState(null);
   const [mainImgUrl, setMainImgUrl] = useState("");
   const [url, setUrl] = useState("");
-  const [res, setRes] = useState({});
+
+  const [imageUrls, setImageUrls] = useState([]);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { id } = useParams();
@@ -37,23 +46,20 @@ const EditMenu = () => {
 
     try {
       setLoading(true);
-      const uploadResponse = await axios.post(
-        `${API_URL}upload/menu`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      if (img == null) return;
+      const imageRef = ref(storage, `menu/${img.name}`);
+      uploadBytes(imageRef, img).then((snapshot) => {
+        getDownloadURL(snapshot.ref).then((url) => {
+          setImageUrls((prev) => [...prev, url]);
+        });
+      });
 
-      const imgURL = uploadResponse.data.url;
-      const response = await axios.patch(`${API_URL}admin/admenus/${id}`,
+      await axios.patch(`${API_URL}admin/admenus/${id}`,
         {
           name,
           parent_id,
           url,
-          img: imgURL,
+          img: img.name,
         },
         {
           headers: {
@@ -61,7 +67,7 @@ const EditMenu = () => {
           },
         }
       );
-      setRes(response.data);
+
       navigate("/admin");
       
     } catch (error) {
@@ -77,8 +83,13 @@ const EditMenu = () => {
     setParentId(response.data.parent_id);
     setImg(response.data.img);
     setUrl(response.data.url);
-
+    if (response.data.img) {
+      const storageRef = ref(storage, `menu/${response.data.img}`);
+      const imgUrl = await getDownloadURL(storageRef);
+      setMainImgUrl(imgUrl);
+    }
   };
+  
   const handleMainImageDrop = (acceptedFiles) => {
     if (acceptedFiles.length > 0) {
       setImg(acceptedFiles[0]);

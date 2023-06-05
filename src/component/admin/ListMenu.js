@@ -5,21 +5,37 @@ import { Table, Input, Button, Space } from "antd";
 import { SearchOutlined,EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import Highlighter from "react-highlight-words";
 import { API_URL } from "../../config";
+import { getDownloadURL,ref } from "firebase/storage";
+import { storage } from "../../firebase";
 const ListMenu = () => {
   const [menus, setMenus] = useState([]);
 
   useEffect(() => {
     getMenus();
   }, []);
-
+  const imagesListRef = ref(storage, "menu/");
   const getMenus = async () => {
     try {
       const response = await axios.get(`${API_URL}admin/admenus`);
-      setMenus(response.data);
+      const menus = response.data;
+  
+      // Lặp qua từng menu để lấy URL của hình từ Firebase Storage
+      await Promise.all(
+        menus.map(async (menu) => {
+          if (menu.img) {
+            const storageRef = ref(storage, `menu/${menu.img}`);
+            const imgUrl = await getDownloadURL(storageRef);
+            menu.img = imgUrl;
+          }
+        })
+      );
+  
+      setMenus(menus);
     } catch (error) {
       console.log(error);
     }
   };
+  
 
   const deleteMenu = async (id) => {
     try {
