@@ -173,7 +173,7 @@ const ListMenu = () => {
       title: "Hình",
       dataIndex: "img",
       key: "img",
-      render: (img) => <img src={`/img/menu/${img}`} width={100} alt="" />,
+      render: (img) => <img src={img} width={100} alt="" />,
     },
     {
       title: "Url",
