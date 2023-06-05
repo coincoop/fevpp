@@ -16,7 +16,21 @@ const AddMenu = () => {
   const [res, setRes] = useState({});
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-
+  const [file, setFile] = useState(null);
+  
+  const handleSelectFile = (e) => setFile(e.target.files[0]);
+  const handleUpload = async () => {
+    try {
+      setLoading(true);
+      const data = new FormData();
+      data.append("img", file);
+      const res = await axios.post(`${API_URL}upload/menu`, data);
+      setRes(res.data);
+    } catch (error) {
+      alert(error.message);
+    } finally {
+      setLoading(false);
+    }}
   useEffect(() => {
     getMenus();
   }, []);
@@ -37,17 +51,17 @@ const AddMenu = () => {
 
       try {
         setLoading(true);
-        const uploadResponse = await axios.post(
-          `${API_URL}upload/menu`,
-          formData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          }
-        );
+        // const uploadResponse = await axios.post(
+        //   `${API_URL}upload/menu`,
+        //   formData,
+        //   {
+        //     headers: {
+        //       "Content-Type": "multipart/form-data",
+        //     },
+        //   }
+        // );
 
-        const imgURL = uploadResponse.data.url;
+        // const imgURL = uploadResponse.data.url;
 
         const response = await axios.post(
           `${API_URL}admin/admenus`,
@@ -55,7 +69,7 @@ const AddMenu = () => {
             name,
             parent_id,
             url,
-            img: imgURL,
+            img,
           },
           {
             headers: {
@@ -155,6 +169,36 @@ const AddMenu = () => {
             <div className="col-md-6 offset-md-3">
 
               <form onSubmit={saveMenu} encType="multipart/form-data" method="post">
+              <label htmlFor="file" className="btn-grey">
+        {" "}
+        select file
+      </label>
+      {file && <center> {file.name}</center>}
+      <input
+        id="file"
+        type="file"
+        onChange={handleSelectFile}
+        multiple={false}
+      />
+      <code>
+        {Object.keys(res).length > 0
+          ? Object.keys(res).map((key) => (
+              <p className="output-item" key={key}>
+                <span>{key}:</span>
+                <span>
+                  {typeof res[key] === "object" ? "object" : res[key]}
+                </span>
+              </p>
+            ))
+          : null}
+      </code>
+      {file && (
+        <>
+          <button onClick={handleUpload} className="btn-green">
+            {loading ? "uploading..." : "upload to cloudinary"}
+          </button>
+        </>
+      )}
                 <div className="mb-3">
                   <label htmlFor="name" className="form-label">
                     Tên menu
