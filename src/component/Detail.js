@@ -13,14 +13,14 @@ import { addToCart } from "../redux/apiRequest.js";
 import { FacebookShareButton } from "react-share";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
 import { animateScroll as scroll } from "react-scroll";
 import { API_URL } from "../config";
 import Rating from "@mui/material/Rating";
-
 import { Pagination } from "antd";
 import Tooltip from "rc-tooltip";
 import Modal from "react-modal";
+import { getDownloadURL, ref } from "firebase/storage";
+import { storage } from "../firebase";
 export default function Detail() {
   const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
@@ -106,8 +106,8 @@ export default function Detail() {
               <div class="row">
                 <div class="col-6">
                   <img
-                    src={"/img/product/" + product.img}
-                    alt=""
+                    src={product.img}
+                    alt={product.tensp}
                     style={{ width: "100%", height: "300px" }}
                   />
                 </div>
@@ -115,7 +115,7 @@ export default function Detail() {
                   <h2>{product.tensp}</h2>
                   <p class="mota-modal">{product.mota}</p>
                   <p class="price-modal">
-                    {product.giacu && product.giacu !== 0 ? (
+                    {product.giacu && product.giacu > 0 ? (
                       <div style={{ fontSize: "15px" }}>
                         <del>
                           <Currency value={product.giacu} />
@@ -183,7 +183,34 @@ export default function Detail() {
   const fetchData = async () => {
     try {
       const response = await axios.get(`${API_URL}${url}`);
-      setProduct(response.data.product);
+      const product = response.data.product;
+      const imgCon = product.img_con;
+  
+      if (imgCon) {
+        const imgUrls = await Promise.all(
+          imgCon.split(",").map(async (img) => {
+            const storageRef = ref(storage, `product/${img}`);
+            const imgUrl = await getDownloadURL(storageRef);
+            return {
+              original: imgUrl,
+              thumbnail: imgUrl,
+              originalAlt: product.tensp,
+              thumbnailAlt: product.tensp,
+            };
+          })
+        );
+        product.imgConUrls = imgUrls;
+      }
+      await Promise.all(
+        response.data.relatedProducts.map(async (prod) => {
+          if (prod.img) {
+            const storageRef = ref(storage, `product/${prod.img}`);
+            const imgUrl = await getDownloadURL(storageRef);
+            prod.img = imgUrl;
+          }
+        })
+      );
+      setProduct(product);
       setRelatedProducts(response.data.relatedProducts);
     } catch (error) {
       console.error(error);
@@ -362,12 +389,7 @@ export default function Detail() {
                     <div>
                       {product && product.img_con && (
                         <ImageGallery
-                          items={product?.img_con?.split(",").map((img) => ({
-                            original: `/img/product/${img}`,
-                            thumbnail: `/img/product/${img}`,
-                            originalAlt: product?.tensp,
-                            thumbnailAlt: product?.tensp,
-                          }))}
+                        items={product?.imgConUrls}
                           showNav={false}
                           showPlayButton={false}
                           showFullscreenButton={false}
@@ -414,7 +436,7 @@ export default function Detail() {
                   </div>
                   <div class="contain-price">
                     <div class="price-regular">
-                      {product.giacu ? (
+                      {product.giacu && product.giacu >0? (
                         <div>
                           <span
                             style={{ fontSize: "16px", display: "block" }}
@@ -440,7 +462,7 @@ export default function Detail() {
                       )}
                     </div>
                     <div class="price-sale">{/* developing */}</div>
-                    <div class="sale">{/* developing */}</div>
+                    
                   </div>
                   {product.donvitinh && <p>Đơn vị tính: {product.donvitinh}</p>}
                   {product.donggoi && <p>Đóng gói: {product.donggoi}</p>}
@@ -725,7 +747,11 @@ export default function Detail() {
                     </div>
                     {currentProducts.map((product) => (
                       <div class="col-lg-2 col-md-3 col-6 container-card">
-                        <div class="sale-banner"></div>
+                        <div style={{ position: "relative" }}>
+                {product.giacu && product.giacu > 0 ? (
+                  <div className="sale">Sale</div>
+                ) : null}
+              </div>
                         <div class="img-product">
                           <Link
                             to={`/product/${product.url}`}
@@ -738,8 +764,8 @@ export default function Detail() {
                           >
                             <img
                               class="bottom-image"
-                              src={"/img/product/" + product.img}
-                              alt=""
+                              src={product.img}
+                              alt={product.tensp}
                             />
                           </Link>
                           {/* <a href={product.url}><img class="top-image" src={"/img/product/" + product.img_con} alt="" /></a> */}
@@ -807,7 +833,7 @@ export default function Detail() {
                             </Link>
                           </div>
                           <div class="price-product">
-                            {product.giacu && product.giacu !== 0 ? (
+                            {product.giacu && product.giacu > 0 ? (
                               <div style={{ fontSize: "15px" }}>
                                 <del>
                                   <Currency value={product.giacu} />

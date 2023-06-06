@@ -10,6 +10,8 @@ import {
   FaTelegram,
 } from "react-icons/fa";
 import { API_URL } from "../config";
+import { getDownloadURL, ref } from "firebase/storage";
+import { storage } from "../firebase";
 
 import axios from "axios";
 export default function Footer() {
@@ -21,10 +23,15 @@ export default function Footer() {
   useEffect(() => {
     const fetchHome = async () => {
       const response = await axios.get(`${API_URL}home/status`);
+      if (imgfoot) {
+        const storageRef = ref(storage, `home/${imgfoot}`);
+        const imgUrl = await getDownloadURL(storageRef);
+        setImgFooter(imgUrl);
+      }
       setSdt(response.data.sdt);
       setDiachi(response.data.diachi);
       setGmail(response.data.gmail);
-      setImgFooter(response.data.imgfoot);
+      
       setMotaFooter(response.data.motaFooter);
     };
     fetchHome();
@@ -86,7 +93,7 @@ export default function Footer() {
                 <div className="footer-logo">
                   <a href="#">
                     <img
-                      src={"/img/home/" + imgfoot}
+                      src={imgfoot}
                       alt=""
                       className="img-fluid"
                     />

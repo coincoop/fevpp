@@ -16,7 +16,8 @@ import Rating from "@mui/material/Rating";
 import Modal from "react-modal";
 import RangeSlider from "react-bootstrap-range-slider";
 import "react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css";
-
+import { getDownloadURL, ref } from "firebase/storage";
+import { storage } from "../firebase";
 function CategoryPage() {
   const [products, setProducts] = useState([]);
   const [name, setName] = useState("");
@@ -32,24 +33,33 @@ function CategoryPage() {
   const [selectedRating, setSelectedRating] = useState(0);
   const [review, setReview] = useState([]);
   const { url } = useParams();
-
+  const fetchProducts = async () => {
+    const response = await axios.get(
+      `${API_URL}categories/${url}`
+    );
+    await Promise.all(
+      response.data.products.map(async (prod) => {
+        if (prod.img) {
+          const storageRef = ref(storage, `product/${prod.img}`);
+          const imgUrl = await getDownloadURL(storageRef);
+          prod.img = imgUrl;
+        }
+      })
+    );
+    setName(response.data.name);
+    setProducts(response.data.products);
+    setReview(response.data);
+    console.log(response.data);
+    console.log(url);
+    console.log(response.data.name);
+    const prices = response.data.products.map((p) => p.dongia);
+    const tempMaxPrice = Math.max(...prices);
+    setMaxPrice(tempMaxPrice);
+    setFilterPrice(tempMaxPrice);
+    setValue(tempMaxPrice);
+  };
   useEffect(() => {
-    const fetchProducts = async () => {
-      const response = await axios.get(
-        `${API_URL}categories/${url}`
-      );
-      setName(response.data.name);
-      setProducts(response.data.products);
-      setReview(response.data);
-      console.log(response.data);
-      console.log(url);
-      console.log(response.data.name);
-      const prices = response.data.products.map((p) => p.dongia);
-      const tempMaxPrice = Math.max(...prices);
-      setMaxPrice(tempMaxPrice);
-      setFilterPrice(tempMaxPrice);
-      setValue(tempMaxPrice);
-    };
+    
     fetchProducts();
   }, [url]);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -167,8 +177,8 @@ function CategoryPage() {
               <div class="row">
                 <div class="col-6">
                   <img
-                    src={"/img/product/" + product.img}
-                    alt=""
+                    src={product.img}
+                    alt={product.tensp}
                     style={{ width: "100%", height: "300px" }}
                   />
                 </div>
@@ -178,7 +188,7 @@ function CategoryPage() {
                     <div dangerouslySetInnerHTML={{ __html: product.mota }} />
                   </p>
                   <p class="price-modal">
-                    {product.giacu && product.giacu !== 0 ? (
+                    {product.giacu && product.giacu > 0 ? (
                       <div style={{ fontSize: "15px" }}>
                         <del>
                           <Currency value={product.giacu} />
@@ -321,7 +331,11 @@ function CategoryPage() {
           </Helmet>
           {record.map((product) => (
             <div class="col-lg-2 col-md-4 col-6 container-card">
-              <div class="sale-banner"></div>
+              <div style={{ position: "relative" }}>
+                {product.giacu && product.giacu > 0 ? (
+                  <div className="sale">Sale</div>
+                ) : null}
+              </div>
               <div class="img-product">
                 <Link to={`/product/${product.url}`} onClick={() => {
                         scroll.scrollToTop({
@@ -331,8 +345,8 @@ function CategoryPage() {
                       }}>
                   <img
                     class="bottom-image"
-                    src={"/img/product/" + product.img}
-                    alt=""
+                    src={product.img}
+                    alt={product.tensp}
                   />
                 </Link>
                 {/* <a href={product.url}><img class="top-image" src={"/img/product/" + product.img_con} alt="" /></a> */}
@@ -414,7 +428,7 @@ function CategoryPage() {
                   )}
                 </div>
                 <div class="price-product">
-                  {product.giacu && product.giacu === 0 && product.giacu !== 'NULL'? (
+                  {product.giacu && product.giacu > 0 ? (
                     <div style={{ fontSize: "15px" }}>
                       <del>
                         <Currency value={product.giacu} />

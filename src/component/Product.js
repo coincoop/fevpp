@@ -9,7 +9,8 @@ import "react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css";
 import { Helmet } from "react-helmet";
 import ProductContain from "./body/ProductContain";
 import Currency from "./body/Currency";
-
+import { getDownloadURL, ref } from "firebase/storage";
+import { storage } from "../firebase";
 export default function Product() {
   const [product, setProduct] = useState([]);
   const [maxPrice, setMaxPrice] = useState(null);
@@ -29,6 +30,15 @@ export default function Product() {
 
   const getProduct = async () => {
     const response = await axios.get(`${API_URL}product`);
+    await Promise.all(
+      response.data.products.map(async (prod) => {
+        if (prod.img) {
+          const storageRef = ref(storage, `product/${prod.img}`);
+          const imgUrl = await getDownloadURL(storageRef);
+          prod.img = imgUrl;
+        }
+      })
+    );
     setProduct(response.data.products);
     setReview(response.data);
     const prices = response.data.products.map((p) => p.dongia);

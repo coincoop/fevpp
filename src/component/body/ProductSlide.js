@@ -11,15 +11,25 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import { animateScroll as scroll } from "react-scroll";
 import { API_URL } from "../../config";
-
+import { getDownloadURL, ref } from "firebase/storage";
+import { storage } from "../../firebase";
 const ProductSlide = () => {
   const [products, setProducts] = useState([]);
-
+  const fetchProduct = async () => {
+    const response = await axios.get(`${API_URL}product`);
+    await Promise.all(
+      response.data.products.map(async (prod) => {
+        if (prod.img) {
+          const storageRef = ref(storage, `product/${prod.img}`);
+          const imgUrl = await getDownloadURL(storageRef);
+          prod.img = imgUrl;
+        }
+      })
+    );
+    setProducts(response.data.products);
+  };
   useEffect(() => {
-    const fetchProduct = async () => {
-      const response = await axios.get(`${API_URL}product`);
-      setProducts(response.data.products);
-    };
+    
     fetchProduct();
   }, []);
   const PrevArrow = (props) => {
@@ -106,13 +116,18 @@ const ProductSlide = () => {
                 });
               }}
             >
-              <img src={`img/product/${product.img}`} alt={product.tensp} />
+              <div style={{ position: "relative" }}>
+                    {product.giacu && product.giacu > 0 ? (
+                      <div className="sale">Sale</div>
+                    ) : null}
+                  </div>
+              <img src={product.img} alt={product.tensp} />
               <div className="product-slide-name" title={product.tensp}>
                 {product.tensp}
               </div>
             </Link>
             <div className="product-slide-price">
-            {product.giacu && product.giacu !== 0 ? (
+            {product.giacu && product.giacu > 0 ? (
               <div style={{ fontSize: "15px", color:"#4d4d4d"}}>
                 <del>
                   <Currency value={product.giacu} />

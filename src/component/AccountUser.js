@@ -44,7 +44,7 @@ export default function Account() {
                                     <p class="profile-address">Address: {user.diachi}</p>
                                 </div>
                             </div>
-                            <a href="#" class="edit-profile-link">Edit Profile</a>
+                            <Link to={'/account/edit'} class="edit-profile-link">Edit Profile</Link>
                         </div>
                     </div>
                 </div>

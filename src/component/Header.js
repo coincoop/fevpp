@@ -17,7 +17,8 @@ import {
 } from "react-scroll";
 
 import { QRCode, Image, Modal } from "antd";
-
+import { getDownloadURL, ref } from "firebase/storage";
+import { storage } from "../firebase";
 export default function Header() {
   const user = useSelector((state) => state.user.login.currentUser);
   const cart = useSelector((state) => state.cart);
@@ -78,7 +79,7 @@ export default function Header() {
     return acc + cartItem.dongia * cartItem.quantity;
   }, 0);
   const getTotalUser = async()=>{
-    const response = await axios.get(`${API_URL}/cart/thanhtien/${user?.makh}`);
+    const response = await axios.get(`${API_URL}cart/thanhtien/${user?.makh}`);
     setTotalUser(response.data);
   }
   const total = user ? totalUser : totalLocal;
@@ -141,16 +142,38 @@ export default function Header() {
   }, []);
   const getProducts = async () => {
     const response = await axios.get(`${API_URL}product`);
+    await Promise.all(
+      response.data.products.map(async (prod) => {
+        if (prod.img) {
+          const storageRef = ref(storage, `product/${prod.img}`);
+          const imgUrl = await getDownloadURL(storageRef);
+          prod.img = imgUrl;
+        }
+      })
+    );
     setProducts(response.data.products);
   };
   const fetchMenus = async () => {
     const response = await axios.get(`${API_URL}`);
+    await Promise.all(
+      response.data.map(async (menu) => {
+        if (menu.img) {
+          const storageRef = ref(storage, `menu/${menu.img}`);
+          const imgUrl = await getDownloadURL(storageRef);
+          menu.img = imgUrl;
+        }
+      })
+    );
     setMenus(response.data);
   };
   const fetchHome = async () => {
     const response = await axios.get(`${API_URL}home/status`);
+    if (imghead) {
+      const storageRef = ref(storage, `home/${imghead}`);
+      const imgUrl = await getDownloadURL(storageRef);
+      setImgHead(imgUrl);
+    }
     setSdt(response.data.sdt);
-    setImgHead(response.data.imghead);
     setName(response.data.ten);
   };
   const handleLogout = () => {
@@ -306,7 +329,7 @@ export default function Header() {
                             value={`${API_URL}`}
                             size={70}
                             iconSize={50 / 4}
-                            icon={"/img/home/" + imghead}
+                            icon={imghead}
                           />
                         </div>
 
@@ -321,7 +344,7 @@ export default function Header() {
                               value={`${API_URL}`}
                               size={qrCodeSize}
                               iconSize={qrCodeSize / 4}
-                              icon={"/img/home/" + imghead}
+                              icon={imghead}
                             />
                           </div>
                         </Modal>
@@ -386,7 +409,7 @@ export default function Header() {
                                     >
                                       <div className="itemSearch">
                                         <Link to={"/product/" + product.url}>
-                                          <img src={"/img/product/" + product.img} alt="" />
+                                          <img src={product.img} alt={product.tensp} />
                                           <span>{product.tensp}</span>
 
                                         </Link>
@@ -631,7 +654,7 @@ export default function Header() {
                 href={"/"}
                 style={{ justifyContent: "center", display: "flex" }}
               >
-                <img className="imghead" src={"/img/home/" + imghead} alt="" />
+                <img className="imghead" src={imghead} alt="" />
               </a>
             </div>
 
@@ -654,7 +677,7 @@ export default function Header() {
                             <li className="submenu" key={submenu.id}>
                               <Link to={`${submenu.url}`} onClick={handleClick}>
                                 <img
-                                  src={"/img/menu/" + submenu.img}
+                                  src={submenu.img}
                                   style={{
                                     width: "24px",
                                     marginBottom: "5px",
@@ -740,7 +763,7 @@ export default function Header() {
                               }}
                             >
                               <img
-                                src={"/img/menu/" + menu.img}
+                                src={menu.img}
                                 style={{ width: "24px", marginBottom: "5px" }}
                                 alt=""
                               />

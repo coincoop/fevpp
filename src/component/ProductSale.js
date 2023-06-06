@@ -9,7 +9,9 @@ import RangeSlider from "react-bootstrap-range-slider";
 import "react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css";
 import { Helmet } from "react-helmet";
 import ProductContain from "./body/ProductContain";
-
+import { getDownloadURL, ref } from "firebase/storage";
+import { storage } from "../firebase";
+import Currency from "./body/Currency";
 export default function ProductSale() {
   const [product, setProduct] = useState([]);
   const [maxPrice, setMaxPrice] = useState(0);
@@ -20,7 +22,8 @@ export default function ProductSale() {
   const recordsPerPage = 12;
   const lastIndex = currentPage * recordsPerPage;
   const fistIndex = lastIndex - recordsPerPage;
-
+  const [selectedRating, setSelectedRating] = useState(0);
+  const [review, setReview] = useState([]);
   useEffect(() => {
     getProduct();
     setFilterPrice(maxPrice);
@@ -28,16 +31,31 @@ export default function ProductSale() {
 
   const getProduct = async () => {
     const response = await axios.get(`${API_URL}products/productsale`);
+    await Promise.all(
+      response.data.products.map(async (prod) => {
+        if (prod.img) {
+          const storageRef = ref(storage, `product/${prod.img}`);
+          const imgUrl = await getDownloadURL(storageRef);
+          prod.img = imgUrl;
+        }
+      })
+    );
     setProduct(response.data.products);
+    setReview(response.data);
     const prices = response.data.products.map((p) => p.dongia);
-    setMaxPrice(Math.max(...prices));
+    const tempMaxPrice = Math.max(...prices);
+    setMaxPrice(tempMaxPrice);
+    setFilterPrice(tempMaxPrice);
+    setValue(tempMaxPrice);
   };
 
   const handlePriceFilter = (e) => {
     setFilterPrice(e.target.value);
     setValue(e.target.value);
   };
-
+  const handleRatingFilter = (rating) => {
+    setSelectedRating(rating);
+  };
   const handleSliderAfterChange = (value) => {
     console.log(value);
   };
@@ -65,9 +83,18 @@ export default function ProductSale() {
   };
 
   const numProducts = product.length;
-  const filteredProducts = sortedProducts().filter(
-    (p) => parseInt(p.dongia) <= filterPrice
-  );
+  const filteredProducts = sortedProducts().filter((p) => {
+    const averageRating = p.reviews.reduce(
+      (acc, item) => acc + item.danhgia,
+      0
+    ) / p.reviews.length;
+  
+    if (selectedRating) {
+      return averageRating >= parseInt(selectedRating) && parseInt(p.dongia) <= filterPrice;
+    } else {
+      return parseInt(p.dongia) <= filterPrice;
+    }
+  });
   const record = filteredProducts.slice(fistIndex, lastIndex);
   const npage = Math.ceil(filteredProducts.length / recordsPerPage);
   const numbers = [...Array(npage + 1).keys()].slice(1);
@@ -99,13 +126,13 @@ export default function ProductSale() {
           </div>
           <div class="filter-contain">
             <div class="dropdown rangeslider block-filsort">
-              <span>Filter: </span>
+              <span>Chọn mức giá phù hợp: </span>
               <button
                 type="button"
                 class="dropdown-toggle btn-rangefilter"
                 data-bs-toggle="dropdown"
               >
-                Price
+                Giá tiền từ
               </button>
               <ul class="dropdown-menu rangeslider-contain">
                 <li>
@@ -121,32 +148,59 @@ export default function ProductSale() {
                   />
                 </li>
                 <li class="rangeslider-count">
-                  <div style={{ marginLeft: "5%" }}>$0</div>
-                  <div style={{ marginLeft: "60%" }}>${value}</div>
+                  <div style={{ marginLeft: "5%", marginRight: "55%" }}>
+                    {" "}
+                    <Currency value={0} />
+                  </div>
+                  <div style={{}}>
+                    {" "}
+                    <Currency value={value} />
+                  </div>
                 </li>
               </ul>
-              <span>$0</span>
-              <span>-</span>
-              <span>${value}</span>
+              <span className="ms-2">
+                {" "}
+                <Currency value={0} />
+              </span>
+              <span> - </span>
+              <span>
+                <Currency value={value} />
+              </span>
             </div>
-            <div class="block-filsort justify-content-end sort-contain">
-              <span>Sort: </span>
+            <div class="block-filsort sort-contain">
+              <span>Sắp xếp theo: </span>
               <div>
                 <select value={sortValue} onChange={handleSortChange}>
-                  <option value="">Select</option>
-                  <option value="priceAsc">Price (low to high)</option>
-                  <option value="priceDesc">Price (high to low)</option>
-                  <option value="nameAsc">Name (A to Z)</option>
-                  <option value="nameDesc">Name (Z to A)</option>
+                  <option value="">Chọn</option>
+                  <option value="priceAsc">Giá: Tăng dần</option>
+                  <option value="priceDesc">Giá: Giảm dần</option>
+                  <option value="nameAsc">Tên: A - Z</option>
+                  <option value="nameDesc">Tên: Z - A</option>
                 </select>
               </div>
-              <span> {numProducts} products</span>
+              <span> {numProducts} sản phẩm</span>
+            </div>
+          </div>
+          <div className="block-filsort d-flex">
+            <span>Đánh giá: </span>
+            <div>
+              <select
+                value={selectedRating}
+                onChange={(e) => handleRatingFilter(e.target.value)}
+              >
+                <option value="">Tất cả</option>
+                <option value="5">5 sao</option>
+                <option value="4">4 sao</option>
+                <option value="3">3 sao</option>
+                <option value="2">2 sao</option>
+                <option value="1">1 sao</option>
+              </select>
             </div>
           </div>
           <div style={{ height: "30px" }}></div>
           <div class="row">
             {record.map((product) => (
-              <ProductContain product={product} />
+              <ProductContain product={product} selectedRating={selectedRating}/>
             ))}
           </div>
         </div>

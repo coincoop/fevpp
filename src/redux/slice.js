@@ -17,13 +17,17 @@ const userReducer = createSlice({
         logout: {
             isFetching: false,
             error: false
-        }
+        },
     },
 
     reducers: {
         loginStart: (state) => {
             state.login.isFetching = true;
 
+        },
+        updateUser : (state,action) => {
+            state.login.currentUser = action.payload;
+            state.login.error = false;
         },
         loginSuccess: (state, action) => {
             state.login.isFetching = false;
@@ -71,6 +75,7 @@ export const {
     loginStart,
     loginFailed,
     loginSuccess,
+    updateUser,
     registerFailed,
     registerStart,
     registerSuccess,
@@ -128,5 +133,4 @@ export const reducers = {
     user: userReducer.reducer,
     cart: cartReducer.reducer
 }
-
 

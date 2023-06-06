@@ -164,3 +164,20 @@
     display: block;
 }
 }
+.sale{
+  position: absolute;
+  top: 10px;
+  left:10px;
+  background-color:#ff2b2b;
+  color: #fff;
+  height: 50px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  font-size: 13px;
+  width: 60px;
+  aspect-ratio: 1;
+  clip-path: polygon(100.00% 50.00%,83.81% 59.06%,93.30% 75.00%,74.75% 74.75%,75.00% 93.30%,59.06% 83.81%,50.00% 100.00%,40.94% 83.81%,25.00% 93.30%,25.25% 74.75%,6.70% 75.00%,16.19% 59.06%,0.00% 50.00%,16.19% 40.94%,6.70% 25.00%,25.25% 25.25%,25.00% 6.70%,40.94% 16.19%,50.00% 0.00%,59.06% 16.19%,75.00% 6.70%,74.75% 25.25%,93.30% 25.00%,83.81% 40.94%);
+}

@@ -10,7 +10,8 @@ import { addProduct } from "../../redux/slice.js";
 import { animateScroll as scroll } from "react-scroll";
 import Rating from "@mui/material/Rating";
 import Modal from "react-modal";
-
+import { getDownloadURL, ref } from "firebase/storage";
+import { storage } from "../../firebase";
 export default function ProductContain(props) {
   const { product, selectedRating } = props;
   const quantity = 1;
@@ -78,7 +79,7 @@ export default function ProductContain(props) {
               <div class="row">
                 <div class="col-6">
                   <img
-                    src={`img/product/${product.img}`}
+                    src={product.img}
                     alt=""
                     style={{ width: "100%", height: "300px" }}
                   />
@@ -89,7 +90,7 @@ export default function ProductContain(props) {
                     <div dangerouslySetInnerHTML={{ __html: product.mota }} />
                   </p>
                   <p class="price-modal">
-                    {product.giacu && product.giacu !== 0 ? (
+                    {product.giacu && product.giacu > 0 ? (
                       <div style={{ fontSize: "15px" }}>
                         <del>
                           <Currency value={product.giacu} />
@@ -152,7 +153,11 @@ export default function ProductContain(props) {
   return (
     <>
       <div class="col-lg-2 col-md-4 col-6 container-card">
-        <div class="sale-banner"></div>
+      <div style={{ position: "relative" }}>
+                {product.giacu && product.giacu > 0 ? (
+                  <div className="sale">Sale</div>
+                ) : null}
+              </div>
         <div class="img-product">
           <Link
             to={`/product/${product.url}`}
@@ -165,8 +170,8 @@ export default function ProductContain(props) {
           >
             <img
               class="bottom-image"
-              src={"/img/product/" + product.img}
-              alt=""
+              src={product.img}
+              alt={product.tensp}
             />
           </Link>
         </div>
@@ -236,7 +241,7 @@ export default function ProductContain(props) {
             )}
           </div>
           <div class="price-product">
-            {product.giacu && product.giacu !== 0 ? (
+            {product.giacu && product.giacu > 0 ? (
               <div style={{ fontSize: "15px" }}>
                 <del>
                   <Currency value={product.giacu} />

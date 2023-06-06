@@ -17,7 +17,7 @@ import Blog from "./component/Blog";
 import ProductSale from "./component/ProductSale";
 import Contact from "./component/Contact";
 import NotFound from "./component/NotFound";
-
+import AccountEdit from "./component/AccountEdit";
 //Admin
 import AddMenu from "./component/admin/AddMenu";
 import EditMenu from "./component/admin/EditMenu";
@@ -64,6 +64,7 @@ function App() {
         <Route path="/account" element={<Navigate to="/account/user" replace />} />
         <Route path="/account/user" element={<Layout><AccountUser /></Layout>} />
         <Route path="/account/cart" element={<Layout><AccountCart /></Layout>} />
+        <Route path="/account/edit" element={<Layout><AccountEdit /></Layout>} />
         {/* <Route path="/products/:id" element={<Product />} />
           <Route path="/admin" element={<ProductList />} /> */}
         {/* <Route path="/login" element={<Login />} />

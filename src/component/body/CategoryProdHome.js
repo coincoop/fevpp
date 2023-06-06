@@ -12,7 +12,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { animateScroll as scroll } from "react-scroll";
 import Modal from "react-modal";
 import { API_URL } from "../../config";
-
+import { getDownloadURL, ref } from "firebase/storage";
+import { storage } from "../../firebase";
 import Rating from "@mui/material/Rating";
 function CategoryProdHome() {
   const [products, setProducts] = useState([]);
@@ -34,6 +35,15 @@ function CategoryProdHome() {
         name: response.data.name,
         products: response.data.products,
       };
+      await Promise.all(
+        response.data.products.map(async (prod) => {
+          if (prod.img) {
+            const storageRef = ref(storage, `product/${prod.img}`);
+            const imgUrl = await getDownloadURL(storageRef);
+            prod.img = imgUrl;
+          }
+        })
+      );
       setCategoryProducts((prevCategoryProducts) => [
         ...prevCategoryProducts,
         categoryProduct,
@@ -50,7 +60,7 @@ function CategoryProdHome() {
       const cateData = response.data;
       const sortedCateData = cateData.sort((a, b) => a.stt - b.stt);
       setCateUrls(sortedCateData);
-  
+
       const fetchProductPromises = sortedCateData.map((cateItem) =>
         fetchProducts(cateItem.url)
       );
@@ -60,7 +70,7 @@ function CategoryProdHome() {
       // Xử lý lỗi
     }
   };
-  
+
 
   useEffect(() => {
     fetchCateProd();
@@ -123,7 +133,7 @@ function CategoryProdHome() {
               <div class="row">
                 <div class="col-6">
                   <img
-                    src={`img/product/${product.img}`}
+                    src={product.img}
                     alt=""
                     style={{ width: "100%", height: "300px" }}
                   />
@@ -134,7 +144,7 @@ function CategoryProdHome() {
                     <div dangerouslySetInnerHTML={{ __html: product.mota }} />
                   </p>
                   <p class="price-modal">
-                    {product.giacu && product.giacu !== 0 ? (
+                    {product.giacu && product.giacu > 0 ? (
                       <div style={{ fontSize: "15px" }}>
                         <del>
                           <Currency value={product.giacu} />
@@ -207,11 +217,16 @@ function CategoryProdHome() {
                 </Link>
               </div>
               {categoryProduct.products.slice(0, 6).map((product) => (
+
                 <div
                   key={product.id}
                   class="col-lg-2 col-md-3 col-6 container-card"
                 >
-                  <div class="sale-banner"></div>
+                  <div style={{ position: "relative" }}>
+                    {product.giacu && product.giacu > 0 ? (
+                      <div className="sale">Sale</div>
+                    ) : null}
+                  </div>
                   <div class="img-product">
                     <Link
                       to={`/product/${product.url}`}
@@ -224,8 +239,8 @@ function CategoryProdHome() {
                     >
                       <img
                         class="bottom-image"
-                        src={"/img/product/" + product.img}
-                        alt=""
+                        src={product.img}
+                        alt={product.tensp}
                       />
                     </Link>
                     {/* <a href={product.url}><img class="top-image" src={"/img/product/" + product.img_con} alt="" /></a> */}
@@ -313,7 +328,7 @@ function CategoryProdHome() {
                       )}
                     </div>
                     <div class="price-product">
-                      {product.giacu && product.giacu !== 0  && product.giacu!=='NULL' ?(
+                      {product.giacu && product.giacu > 0 ? (
                         <div style={{ fontSize: "15px" }}>
                           <del>
                             <Currency value={product.giacu} />

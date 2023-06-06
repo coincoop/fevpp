@@ -11,7 +11,8 @@ import { animateScroll as scroll } from "react-scroll";
 import { API_URL } from "../../config";
 import Rating from "@mui/material/Rating";
 import Modal from "react-modal";
-
+import { getDownloadURL, ref } from "firebase/storage";
+import { storage } from "../../firebase";
 export default function Detail() {
   const [products, setProduct] = useState([]);
   useEffect(() => {
@@ -20,6 +21,15 @@ export default function Detail() {
   const [review, setReview] = useState([]);
   const getProduct = async () => {
     const response = await axios.get(`${API_URL}product`);
+    await Promise.all(
+      response.data.products.map(async (prod) => {
+        if (prod.img) {
+          const storageRef = ref(storage, `product/${prod.img}`);
+          const imgUrl = await getDownloadURL(storageRef);
+          prod.img = imgUrl;
+        }
+      })
+    );
     setProduct(response.data.products);
 setReview(response.data);
   };
@@ -69,7 +79,7 @@ setReview(response.data);
               <div class="row">
                 <div class="col-6">
                   <img
-                    src={`img/product/${product.img}`}
+                    src={product.img}
                     alt=""
                     style={{ width: "100%", height: "300px" }}
                   />
@@ -80,7 +90,7 @@ setReview(response.data);
                     <div dangerouslySetInnerHTML={{ __html: product.mota }} />
                   </p>
                   <p class="price-modal">
-                    {product.giacu && product.giacu !== 0 ? (
+                    {product.giacu && product.giacu > 0 ? (
                       <div style={{ fontSize: "15px" }}>
                         <del>
                           <Currency value={product.giacu} />
@@ -149,7 +159,11 @@ setReview(response.data);
            
             {products.slice(0, 12).map((product) => (
               <div class="col-lg-2 col-md-4 col-6 container-card">
-                <div class="sale-banner"></div>
+                 <div style={{ position: "relative" }}>
+                {product.giacu && product.giacu > 0 ? (
+                  <div className="sale">Sale</div>
+                ) : null}
+              </div>
                 <div class="img-product">
                   <Link
                     to={`/product/${product.url}`}
@@ -162,8 +176,8 @@ setReview(response.data);
                   >
                     <img
                       class="bottom-image"
-                      src={"/img/product/" + product.img}
-                      alt=""
+                      src={product.img}
+                      alt={product.tensp}
                     />
                   </Link>
                   {/* <a href={product.url}><img class="top-image" src={"/img/product/" + product.img_con} alt="" /></a> */}
@@ -245,7 +259,7 @@ setReview(response.data);
                   )}
                 </div>
                   <div class="price-product">
-                  {product.giacu && product.giacu !== 0 ? (
+                  {product.giacu && product.giacu > 0 ? (
                     <div style={{ fontSize: "15px" }}>
                       <del>
                         <Currency value={product.giacu} />
