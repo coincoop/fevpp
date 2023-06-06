@@ -6,6 +6,15 @@ import { Editor } from "@tinymce/tinymce-react";
 
 import unidecode from "unidecode";
 import { API_URL } from "../../config";
+import {
+  ref,
+  uploadBytes,
+  getDownloadURL,
+  listAll,
+  list,
+} from "firebase/storage";
+
+import { storage } from "../../firebase.js";
 const AddProduct = () => {
   const [tensp, setTensp] = useState("");
   const [mota, setMota] = useState("");
@@ -14,10 +23,8 @@ const AddProduct = () => {
   const [giacu, setGiacu] = useState("");
   const [img, setImg] = useState(null);
   const [img_con, setImg_con] = useState([]);
-
   const [id_loailon, setIdloailon] = useState("");
   const [menu1List, setMenu1List] = useState([]);
-  
   const [id_loai, setIdloai] = useState("");
   const [menu2List, setMenu2List] = useState([]);
   const [color, setColor] = useState("");
@@ -31,6 +38,7 @@ const AddProduct = () => {
   const [thuonghieu, setThuonghieu] = useState("");
   const [thetich, setThetich] = useState("");
   const [url, setUrl] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -45,7 +53,6 @@ const AddProduct = () => {
     img_con.forEach((file) => {
       formData.append("img_con", file);
     });
-   
     formData.append("id_loailon", id_loailon);
     formData.append("id_loai", id_loai);
     formData.append("color", color);
@@ -62,6 +69,18 @@ const AddProduct = () => {
     console.log(formData.get("img"));
     console.log(formData.getAll("img_con"));
     try {
+      setLoading(true);
+      if (img == null) return;
+      const imageRef = ref(storage, `product/${img.name}`);
+      uploadBytes(imageRef, img);
+
+      
+      img_con.forEach(async (file) => {
+        const subImageRef = ref(storage, `product/${file.name}`);
+        await uploadBytes(subImageRef, file);
+       
+      });
+     
       await axios.post(`${API_URL}admin/adproducts`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -70,6 +89,9 @@ const AddProduct = () => {
       navigate("/admin");
     } catch (error) {
       console.log(error);
+    }
+    finally {
+      setLoading(false);
     }
   };
   useEffect(() => {
@@ -102,6 +124,55 @@ const AddProduct = () => {
   }, [img, img_con]);
 
   return (
+    <>
+    {loading && <div><div class="box-of-star1">
+      <div class="star star-position1"></div>
+      <div class="star star-position2"></div>
+      <div class="star star-position3"></div>
+      <div class="star star-position4"></div>
+      <div class="star star-position5"></div>
+      <div class="star star-position6"></div>
+      <div class="star star-position7"></div>
+    </div>
+      <div class="box-of-star2">
+        <div class="star star-position1"></div>
+        <div class="star star-position2"></div>
+        <div class="star star-position3"></div>
+        <div class="star star-position4"></div>
+        <div class="star star-position5"></div>
+        <div class="star star-position6"></div>
+        <div class="star star-position7"></div>
+      </div>
+      <div class="box-of-star3">
+        <div class="star star-position1"></div>
+        <div class="star star-position2"></div>
+        <div class="star star-position3"></div>
+        <div class="star star-position4"></div>
+        <div class="star star-position5"></div>
+        <div class="star star-position6"></div>
+        <div class="star star-position7"></div>
+      </div>
+      <div class="box-of-star4">
+        <div class="star star-position1"></div>
+        <div class="star star-position2"></div>
+        <div class="star star-position3"></div>
+        <div class="star star-position4"></div>
+        <div class="star star-position5"></div>
+        <div class="star star-position6"></div>
+        <div class="star star-position7"></div>
+      </div>
+      <div data-js="astro" class="astronaut">
+        <div class="head"></div>
+        <div class="arm arm-left"></div>
+        <div class="arm arm-right"></div>
+        <div class="body">
+          <div class="panel"></div>
+        </div>
+        <div class="leg leg-left"></div>
+        <div class="leg leg-right"></div>
+        <div class="schoolbag"></div>
+      </div></div>}
+    {!loading && (
     <div className="containeradmin">
       <div className="row">
         <div className="col-md-6 offset-md-3">
@@ -143,14 +214,14 @@ const AddProduct = () => {
                   menubar: true,
                   images_upload_max_filesize: "5mb",
                   plugins: [
-                  
-                    
+
+
                     "autoresize",
                     "autosave",
                     "autolink",
                     "autosubmit",
                     "bbcode",
-                    
+
                     "codesample",
                     "directionality",
                     "emoticons",
@@ -199,7 +270,7 @@ const AddProduct = () => {
                 onEditorChange={(content) => setMota(content)}
               />
             </div>
-            
+
 
             <div className="mb-3">
               <label htmlFor="mota_chinh" className="form-label">
@@ -212,12 +283,12 @@ const AddProduct = () => {
                   height: 500,
                   menubar: true,
                   images_upload_max_filesize: "5mb",
-                  plugins: [ 
+                  plugins: [
                     "autoresize",
                     "autosave",
                     "autolink",
                     "autosubmit",
-                    "bbcode",          
+                    "bbcode",
                     "codesample",
                     "directionality",
                     "emoticons",
@@ -305,7 +376,7 @@ const AddProduct = () => {
                 onChange={(e) => setDongia(e.target.value)}
               />
             </div>
-            
+
             <div className="mb-3">
               <label htmlFor="img" className="form-label">
                 Ảnh chính
@@ -390,7 +461,7 @@ const AddProduct = () => {
             </div>
             <div className="mb-3">
               <label htmlFor="color" className="form-label">
-               Màu sắc
+                Màu sắc
               </label>
               <input
                 type="text"
@@ -401,7 +472,7 @@ const AddProduct = () => {
                 onChange={(e) => setColor(e.target.value)}
               />
             </div>
-            
+
             <div className="mb-3">
               <label htmlFor="dinhluong" className="form-label">
                 Định lượng
@@ -507,14 +578,16 @@ const AddProduct = () => {
                 onChange={(e) => setThetich(e.target.value)}
               />
             </div>
-            <div style={{textAlign: "center"}}><button type="submit" className="btn btn-primary" >
+            <div style={{ textAlign: "center" }}><button type="submit" className="btn btn-primary" >
               Thêm sản phẩm
             </button></div>
-            
+
           </form>
         </div>
       </div>
     </div>
+    )}
+    </>
   );
 };
 

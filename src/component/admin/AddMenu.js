@@ -43,42 +43,31 @@ const AddMenu = () => {
       formData.append("name", name);
       formData.append("parent_id", parent_id);
       formData.append("url", url);
-      formData.append("img", img);
-
+      if (img) {
+        formData.append("img", img);
+      }
+  
       try {
         setLoading(true);
-        const imagesListRef = ref(storage, "menu/");
-
-        if (img == null) return;
-        const imageRef = ref(storage, `menu/${img.name}`);
-        uploadBytes(imageRef, img).then((snapshot) => {
-          getDownloadURL(snapshot.ref).then((url) => {
-            setImageUrls((prev) => [...prev, url]);
-          });
-        });
-
+        if (img) {
+          const imageRef = ref(storage, `menu/${img.name}`);
+          uploadBytes(imageRef, img);
+        }
+  
         await axios.post(
           `${API_URL}admin/admenus`,
-          {
-            name,
-            parent_id,
-            url,
-            img: img.name,
-          },
-
+          formData,
           {
             headers: {
               "Content-Type": "multipart/form-data",
             },
           }
         );
-
-
+  
         navigate("/admin");
       } catch (error) {
         console.log(error);
-      }
-      finally {
+      } finally {
         setLoading(false);
       }
     }

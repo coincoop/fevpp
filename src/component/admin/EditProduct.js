@@ -3,7 +3,15 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import Dropzone from "react-dropzone";
 import { Editor } from "@tinymce/tinymce-react";
+import {
+  ref,
+  uploadBytes,
+  getDownloadURL,
+  listAll,
+  list,
+} from "firebase/storage";
 
+import { storage } from "../../firebase.js";
 import "../../css/addmenu.css";
 import { API_URL } from "../../config";
 import unidecode from "unidecode";
@@ -13,7 +21,7 @@ const EditProduct = () => {
   const [mota, setMota] = useState("");
   const [mota_chinh, setMotachinh] = useState("");
   const [dongia, setDongia] = useState("");
-  const [giacu, setGiacu] = useState("");
+  const [giacu, setGiacu] = useState(0);
   const [img, setImg] = useState(null);
   const [mainImgUrl, setMainImgUrl] = useState("");
   const [img_con, setImg_con] = useState([]);
@@ -34,6 +42,7 @@ const EditProduct = () => {
   const [thuonghieu, setThuonghieu] = useState("");
   const [thetich, setThetich] = useState("");
   const [url, setUrl] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { id } = useParams();
   const handleSubmit = async (e) => {
@@ -66,15 +75,29 @@ const EditProduct = () => {
     console.log(formData.get("img"));
     console.log(formData.getAll("img_con"));
     try {
+      setLoading(true);
+      if (img == null) return;
+      const imageRef = ref(storage, `product/${img.name}`);
+      uploadBytes(imageRef, img);
+
+      
+      img_con.forEach(async (file) => {
+        const subImageRef = ref(storage, `product/${file.name}`);
+        await uploadBytes(subImageRef, file);
+       
+      });
       await axios.patch(`${API_URL}admin/adproducts/${id}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
-      navigate("/");
-      window.location.reload();
+      navigate("/admin");
+      
     } catch (error) {
       console.log(error);
+    }
+    finally {
+      setLoading(false);
     }
   };
 
@@ -86,7 +109,7 @@ const EditProduct = () => {
     setDongia(response.data.dongia);
     setGiacu(response.data.giacu);
     setImg(response.data.img);
-    setImg_con(response.data.img_con.split(",").map((name) => ({ name })));
+    setImg_con(response.data.img_con);
 
     setIdnhacungcap(response.data.id_nhacungcap);
     setIdloailon(response.data.id_loailon);
@@ -102,6 +125,18 @@ const EditProduct = () => {
     setThuonghieu(response.data.thuonghieu);
     setThetich(response.data.thetich);
     setUrl(response.data.url);
+    const imgConUrls = await Promise.all(
+      response.data.img_con.split(",").map(async (name) => {
+        const storageRef = ref(storage, `product/${name}`);
+        return await getDownloadURL(storageRef);
+      })
+    );
+    setImg_con(imgConUrls);
+    if (response.data.img) {
+      const storageRef = ref(storage, `product/${response.data.img}`);
+      const imgUrl = await getDownloadURL(storageRef);
+      setMainImgUrl(imgUrl);
+    }
   };
   useEffect(() => {
     getMenus();
@@ -138,6 +173,55 @@ const EditProduct = () => {
   };
   
   return (
+    <>
+    {loading && <div><div class="box-of-star1">
+      <div class="star star-position1"></div>
+      <div class="star star-position2"></div>
+      <div class="star star-position3"></div>
+      <div class="star star-position4"></div>
+      <div class="star star-position5"></div>
+      <div class="star star-position6"></div>
+      <div class="star star-position7"></div>
+    </div>
+      <div class="box-of-star2">
+        <div class="star star-position1"></div>
+        <div class="star star-position2"></div>
+        <div class="star star-position3"></div>
+        <div class="star star-position4"></div>
+        <div class="star star-position5"></div>
+        <div class="star star-position6"></div>
+        <div class="star star-position7"></div>
+      </div>
+      <div class="box-of-star3">
+        <div class="star star-position1"></div>
+        <div class="star star-position2"></div>
+        <div class="star star-position3"></div>
+        <div class="star star-position4"></div>
+        <div class="star star-position5"></div>
+        <div class="star star-position6"></div>
+        <div class="star star-position7"></div>
+      </div>
+      <div class="box-of-star4">
+        <div class="star star-position1"></div>
+        <div class="star star-position2"></div>
+        <div class="star star-position3"></div>
+        <div class="star star-position4"></div>
+        <div class="star star-position5"></div>
+        <div class="star star-position6"></div>
+        <div class="star star-position7"></div>
+      </div>
+      <div data-js="astro" class="astronaut">
+        <div class="head"></div>
+        <div class="arm arm-left"></div>
+        <div class="arm arm-right"></div>
+        <div class="body">
+          <div class="panel"></div>
+        </div>
+        <div class="leg leg-left"></div>
+        <div class="leg leg-right"></div>
+        <div class="schoolbag"></div>
+      </div></div>}
+    {!loading && (
     <div className="containeradmin">
       <div className="row">
         <div className="col-md-6 offset-md-3">
@@ -319,6 +403,7 @@ const EditProduct = () => {
                   className="form-control"
                   placeholder="Giá cũ"
                   value={giacu}
+                  min={0}
                   onChange={(e) => setGiacu(e.target.value)}
                 />
               </div>
@@ -331,6 +416,7 @@ const EditProduct = () => {
                   placeholder="Đơn giá"
                   className="form-control"
                   value={dongia}
+                  min={0}
                   onChange={(e) => setDongia(e.target.value)}
                 />
               </div>
@@ -352,7 +438,7 @@ const EditProduct = () => {
                       />
                     ) : (
                       <img
-                        src={`/img/product/${img}`}
+                        src={img}
                         alt="main"
                         className="img-thumbnail"
                       />
@@ -375,9 +461,9 @@ const EditProduct = () => {
               </Dropzone>
               {warning && <div className="alert alert-danger">{warning}</div>}
               {Array.isArray(img_con) && img_con.length > 0 && (
-                <div className="mt-3">
+                <div className="mt-3 row">
                   {img_con.map((image, index) => (
-                    <div key={`sub-image-${index}`} className="col-md-3">
+                    <div key={`sub-image-${index}`} className="col-6">
                       {image.name &&
                       image.type &&
                       image.type.startsWith("image/") ? (
@@ -388,7 +474,7 @@ const EditProduct = () => {
                         />
                       ) : (
                         <img
-                          src={`/img/product/${image.name}`}
+                          src={image}
                           alt="sub"
                           className="img-thumbnail"
                         />
@@ -573,6 +659,8 @@ const EditProduct = () => {
         </div>
       </div>
     </div>
+     )}
+     </>
   );
 };
 

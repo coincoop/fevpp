@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { Table, Switch, Image, Button,Space,Tooltip } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { API_URL } from "../../config";
+import { getDownloadURL,ref } from "firebase/storage";
+import { storage } from "../../firebase";
 const ListHome = () => {
   const [home, setHome] = useState([]);
 
@@ -14,7 +16,37 @@ const ListHome = () => {
   const getHome = async () => {
     try {
       const response = await axios.get(`${API_URL}admin/home`);
-      setHome(response.data);
+      const homedata = response.data;
+      await Promise.all(
+        homedata.map(async (home) => {
+          if (home.imghead) {
+            const storageRef1 = ref(storage, `home/${home.imghead}`);
+            const imgUrlHead = await getDownloadURL(storageRef1);
+            home.imghead = imgUrlHead;
+          }
+          if (home.imgfoot) {
+            const storageRef2 = ref(storage, `home/${home.imgfoot}`);
+            const imgUrlFoot = await getDownloadURL(storageRef2);
+            home.imgfoot = imgUrlFoot;
+          }
+          if (home.img1) {
+            const storageRef3 = ref(storage, `home/${home.img1}`);
+            const imgUrl1 = await getDownloadURL(storageRef3);
+            home.img1 = imgUrl1;
+          }
+          if (home.img2) {
+            const storageRef4 = ref(storage, `home/${home.img2}`);
+            const imgUrl2 = await getDownloadURL(storageRef4);
+            home.img2 = imgUrl2;
+          }
+          if (home.img3) {
+            const storageRef5 = ref(storage, `home/${home.img3}`);
+            const imgUrl3 = await getDownloadURL(storageRef5);
+            home.img3 = imgUrl3;
+          }
+        })
+      );
+      setHome(homedata);
     } catch (error) {
       console.log(error);
     }
@@ -67,7 +99,7 @@ const ListHome = () => {
       dataIndex: "imghead",
       key: "imghead",
       render: (imghead, record) => (
-        <Image src={`/img/home/${imghead}`} width={75} alt={record.name} />
+        <Image src={imghead} width={75} alt={record.name} />
       ),
       width: 120,
     },
@@ -76,7 +108,7 @@ const ListHome = () => {
       dataIndex: "imgfoot",
       key: "imgfoot",
       render: (imgfoot, record) => (
-        <Image src={`/img/home/${imgfoot}`} width={75} alt={record.name} />
+        <Image src={imgfoot} width={75} alt={record.name} />
       ),
       width: 120,
     },
@@ -85,7 +117,7 @@ const ListHome = () => {
       dataIndex: "img1",
       key: "img1",
       render: (img1, record) => (
-        <Image src={`/img/home/${img1}`} width={75} alt={record.name} />
+        <Image src={img1} width={75} alt={record.name} />
       ),
       width: 120,
     },
@@ -94,7 +126,7 @@ const ListHome = () => {
       dataIndex: "img2",
       key: "img2",
       render: (img2, record) => (
-        <Image src={`/img/home/${img2}`} width={75} alt={record.name} />
+        <Image src={img2} width={75} alt={record.name} />
       ),
       width: 120,
     },
@@ -103,7 +135,7 @@ const ListHome = () => {
       dataIndex: "img3",
       key: "img3",
       render: (img3, record) => (
-        <Image src={`/img/home/${img3}`} width={75}  alt={record.name} />
+        <Image src={img3} width={75}  alt={record.name} />
       ),
       width: 120,
     },

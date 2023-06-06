@@ -7,23 +7,34 @@ import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import Highlighter from "react-highlight-words";
 import Currency from "./Currency";
 import { API_URL } from "../../config";
-
+import { getDownloadURL,ref } from "firebase/storage";
+import { storage } from "../../firebase";
 const ListProduct = () => {
   const [products, setProductsss] = useState([]);
 
   useEffect(() => {
-    getProductsss();
+    getProducts();
   }, []);
 
-  const getProductsss = async () => {
+  const getProducts = async () => {
     const response = await axios.get(`${API_URL}admin/adproducts`);
-    setProductsss(response.data);
+    const prod = response.data;
+    await Promise.all(
+      prod.map(async (prod) => {
+        if (prod.img) {
+          const storageRef = ref(storage, `product/${prod.img}`);
+          const imgUrl = await getDownloadURL(storageRef);
+          prod.img = imgUrl;
+        }
+      })
+    );
+    setProductsss(prod);
   };
 
   const deleteProduct = async (id) => {
     try {
       await axios.delete(`${API_URL}admin/adproducts/${id}`);
-      getProductsss();
+      getProducts();
     } catch (error) {
       console.log(error);
     }
@@ -235,7 +246,7 @@ const ListProduct = () => {
       render: (img) => (
         <img
           style={{ textAlign: "center" }}
-          src={`/img/product/${img}`}
+          src={img}
           width={50}
           alt=""
         />
