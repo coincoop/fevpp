@@ -19,7 +19,7 @@ export default function BlogAll() {
   }, []);
 
   const getBlog = async () => {
-    const response = await axios.get(`${API_URL}/blog/all`);
+    const response = await axios.get(`${API_URL}blog/all`);
     setBlog(response.data);
   };
 
@@ -48,7 +48,6 @@ export default function BlogAll() {
       <div className="blog-post">
         <div className="container">
           <h2 className="section-header">Tin tức mới nhất</h2>
-          <p className="section-text"></p>
 
           <div className="row">
             {record.map((item) => (
@@ -73,7 +72,7 @@ export default function BlogAll() {
                         <span className="link-hover">{item.tenblog}</span>
                       </h2>
                     </Link>
-                    <Link className="link-base link-" to={`/blog/${item.url}`}>
+                    <Link className="link-base link- blogall-but" to={`/blog/${item.url}`}>
                       Xem Thêm <i><FaPlus /></i>
                     </Link>
                     <div dangerouslySetInnerHTML={{ __html: item.mota_chinh }}></div>

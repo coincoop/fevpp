@@ -23,11 +23,13 @@ export default function Footer() {
   useEffect(() => {
     const fetchHome = async () => {
       const response = await axios.get(`${API_URL}home/status`);
+      const imgfoot = response.data.imgfoot;
       if (imgfoot) {
         const storageRef = ref(storage, `home/${imgfoot}`);
         const imgUrl = await getDownloadURL(storageRef);
         setImgFooter(imgUrl);
       }
+      
       setSdt(response.data.sdt);
       setDiachi(response.data.diachi);
       setGmail(response.data.gmail);

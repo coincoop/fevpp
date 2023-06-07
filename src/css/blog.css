@@ -89,6 +89,7 @@ object-fit: cover;
 
   .blog-layout-items-1 .link-base {
     border: none;
+    text-decoration: none;
     background-color: #f5f5f5;
     color: #01213a;
     padding: 8px 20px;

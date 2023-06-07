@@ -4,7 +4,8 @@ import { Outlet, Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import "../css/cart.css";
 import { API_URL } from "../config";
-
+import { getDownloadURL, ref } from "firebase/storage";
+import { storage } from "../firebase";
 export default function Cart() {
     const cart = useSelector((state) => state.cart.cart);
     const user = useSelector((state) => state.user.login.currentUser);

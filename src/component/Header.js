@@ -168,6 +168,8 @@ export default function Header() {
   };
   const fetchHome = async () => {
     const response = await axios.get(`${API_URL}home/status`);
+    const imghead = response.data.imghead;
+    
     if (imghead) {
       const storageRef = ref(storage, `home/${imghead}`);
       const imgUrl = await getDownloadURL(storageRef);
