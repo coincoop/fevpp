@@ -232,11 +232,13 @@ export default function Detail() {
     return acc + item.danhgia;
   }, 0);
   const avDanhgia = tongDanhgia / review.length;
-
+  const accessToken = user?.accessToken;
   const getTenkhByMakh = async (makhArray) => {
     const tenkhs = [];
     for (let i = 0; i < makhArray.length; i++) {
-      const response = await axios.get(`${API_URL}account/${makhArray[i]}`);
+      const response = await axios.get(`${API_URL}account/${makhArray[i]}`, {
+        headers: { token: accessToken }
+      });
       tenkhs.push(response.data);
       setIsLoading(false);
     }
@@ -376,7 +378,7 @@ export default function Detail() {
   // };
 
   if (isLoading) {
-    return<div className="load"><div class="loader" />;</div>;
+    return<div className="load"><div class="loader" /></div>;
   } else {
     return (
       <>
