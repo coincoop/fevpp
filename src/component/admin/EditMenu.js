@@ -20,8 +20,6 @@ const EditMenu = () => {
   const [img, setImg] = useState(null);
   const [mainImgUrl, setMainImgUrl] = useState("");
   const [url, setUrl] = useState("");
-
-  const [imageUrls, setImageUrls] = useState([]);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { id } = useParams();
@@ -42,7 +40,7 @@ const EditMenu = () => {
     formData.append("parent_id", parent_id);
     formData.append("img", img);
     formData.append("url", url);
-    console.log(formData.get("img"));
+    
 
     try {
       setLoading(true);
@@ -50,7 +48,7 @@ const EditMenu = () => {
       const imageRef = ref(storage, `menu/${img.name}`);
       uploadBytes(imageRef, img).then((snapshot) => {
         getDownloadURL(snapshot.ref).then((url) => {
-          setImageUrls((prev) => [...prev, url]);
+      
         });
       });
 

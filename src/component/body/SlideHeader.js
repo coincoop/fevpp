@@ -5,7 +5,6 @@ import "../../css/slideheader.css";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { FaArrowRight } from "react-icons/fa";
 import { API_URL } from "../../config";
 export default function SlideHeader() {
   const sliderRef = useRef(null);

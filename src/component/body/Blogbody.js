@@ -8,7 +8,8 @@ import "slick-carousel/slick/slick-theme.css";
 import { FaPlus } from "react-icons/fa";
 import { Outlet, Link, useNavigate } from "react-router-dom";
 import { API_URL } from "../../config";
-
+import { getDownloadURL, ref } from "firebase/storage";
+import { storage } from "../../firebase";
 export default function Blogbody() {
   const [blog, setBlog] = useState([]);
   useEffect(() => {
@@ -17,6 +18,15 @@ export default function Blogbody() {
 
   const getBlog = async () => {
     const response = await axios.get(`${API_URL}blog/all`);
+    await Promise.all(
+      response.data.map(async (prod) => {
+        if (prod.img_blog) {
+          const storageRef = ref(storage, `blog/${prod.img_blog}`);
+          const imgUrl = await getDownloadURL(storageRef);
+          prod.img_blog = imgUrl;
+        }
+      })
+    );
     setBlog(response.data);
   };
   const settings = {
@@ -88,7 +98,7 @@ export default function Blogbody() {
                         height="690"
                         loading="lazy"
                         className="motion-reduce"
-                        src={`/img/Blog/${item.img_blog}`}
+                        src={item.img_blog}
                       />
                     </div>
                     <div className="blog-content text-center">

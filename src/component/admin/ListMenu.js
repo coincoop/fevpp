@@ -13,7 +13,7 @@ const ListMenu = () => {
   useEffect(() => {
     getMenus();
   }, []);
-  const imagesListRef = ref(storage, "menu/");
+
   const getMenus = async () => {
     try {
       const response = await axios.get(`${API_URL}admin/admenus`);

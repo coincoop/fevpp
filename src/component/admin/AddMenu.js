@@ -18,7 +18,6 @@ const AddMenu = () => {
   const [name, setName] = useState("");
   const [parent_id, setParentId] = useState("");
   const [img, setImg] = useState(null);
-  const [imageUrls, setImageUrls] = useState([]);
   const [url, setUrl] = useState("");
   const [menuList, setMenuList] = useState([]);
   const [errors, setErrors] = useState({});
@@ -56,7 +55,9 @@ const AddMenu = () => {
   
         await axios.post(
           `${API_URL}admin/admenus`,
-          formData,
+          {
+            name, parent_id, url, img:img.name
+          },
           {
             headers: {
               "Content-Type": "multipart/form-data",
@@ -79,10 +80,7 @@ const AddMenu = () => {
     if (name.trim() === "") {
       errors.name = "Vui lòng nhập tên menu";
     }
-    if (parent_id.trim() === "") {
-      errors.parent_id = "Vui lòng chọn menu cha";
-    }
-
+   
     setErrors(errors);
 
     return Object.keys(errors).length === 0;
@@ -188,7 +186,7 @@ const AddMenu = () => {
                       </option>
                     ))}
                   </select>
-                  {errors.parent_id && <div className="invalid-feedback">{errors.parent_id}</div>}
+                  
                 </div>
 
                 <div className="mb-3">

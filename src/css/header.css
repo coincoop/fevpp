@@ -132,6 +132,7 @@ ul li {
 .spaced-header a {
   text-decoration: none !important;
   color: #ffffff;
+  
   /* fixxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx */
 }
 
@@ -846,6 +847,7 @@ form .fieldSearch .search__button.fieldSearch__button,
   }
   .header-4-bottom .phone {
     display: block;
+    text-align: center;
   }
   .overlay {
     content: "";

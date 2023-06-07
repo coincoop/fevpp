@@ -86,7 +86,7 @@ function App() {
         <Route path="/admin/addContact" element={<AddContact />} />
         {/* <Route path="/edithome/:id" element={<EditHome />} /> */}
         <Route path="/admin/addblog" element={<AddBlog />} />
-        <Route path="/admin/editblog/:id" element={<EditBlog />} />
+        <Route path="/admin/editblog/:idblog" element={<EditBlog />} />
         <Route path="/admin/addCateProd" element={<AddCateProd />} />
         <Route path="/admin/editCateProd/:id" element={<EditCateProd />} />
         {/* <Route path="/addReview" element={<AddReview />} /> */}

@@ -15,7 +15,6 @@ import { API_URL } from "../config";
 import Rating from "@mui/material/Rating";
 import Modal from "react-modal";
 import RangeSlider from "react-bootstrap-range-slider";
-import "react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css";
 import { getDownloadURL, ref } from "firebase/storage";
 import { storage } from "../firebase";
 function CategoryPage() {

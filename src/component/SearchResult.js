@@ -5,6 +5,8 @@ import { useParams } from "react-router-dom";
 import ProductList from './Product';
 import ProductContain from "./body/ProductContain";
 import { API_URL } from "../config";
+import { getDownloadURL, ref } from "firebase/storage";
+import { storage } from "../firebase";
 function SearchResults() {
     const { searchText } = useParams();
     const [products, setProducts] = useState([]);
@@ -14,8 +16,17 @@ function SearchResults() {
     }, [searchText]);
     const fetchProducts = async () => {
         const response = await axios.get(`${API_URL}product`)
+        await Promise.all(
+            response.data.products.map(async (prod) => {
+              if (prod.img) {
+                const storageRef = ref(storage, `product/${prod.img}`);
+                const imgUrl = await getDownloadURL(storageRef);
+                prod.img = imgUrl;
+              }
+            })
+          );
         setProducts(response.data.products);
-      
+     
     };
 
     const filteredProducts = products.filter((product) =>

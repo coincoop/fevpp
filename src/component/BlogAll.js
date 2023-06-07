@@ -5,7 +5,8 @@ import { FaPlus } from "react-icons/fa";
 import { API_URL } from "../config";
 import { colors } from "@mui/material";
 import "../css/blogall.css"
-
+import { getDownloadURL, ref } from "firebase/storage";
+import { storage } from "../firebase";
 export default function BlogAll() {
   const [blog, setBlog] = useState([]);
   const [sortValue, setSortValue] = useState("");
@@ -20,6 +21,15 @@ export default function BlogAll() {
 
   const getBlog = async () => {
     const response = await axios.get(`${API_URL}blog/all`);
+    await Promise.all(
+        response.data.map(async (prod) => {
+          if (prod.img_blog) {
+            const storageRef = ref(storage, `blog/${prod.img_blog}`);
+            const imgUrl = await getDownloadURL(storageRef);
+            prod.img_blog = imgUrl;
+          }
+        })
+      );
     setBlog(response.data);
   };
 
@@ -61,7 +71,7 @@ export default function BlogAll() {
                       height="300"
                       loading="lazy"
                       className="motion-reduce"
-                      src={`/img/Blog/${item.img_blog}`}
+                      src={item.img_blog}
                     />
                   </div>
                     <p className="blog-date">

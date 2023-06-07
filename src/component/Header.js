@@ -648,7 +648,7 @@ export default function Header() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Hotline: <span style={{ color: "red" }}>{sdt}</span>
+                <span style={{ color: "black" }}>Hotline:</span> <span style={{ color: "red" }}>{sdt}</span>
               </a>
             </p>
             <div>

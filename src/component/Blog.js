@@ -25,7 +25,7 @@ export default function Blog() {
   return (
    
     <section>
-      <div class="container">
+      <div class="container mt-3">
       <div dangerouslySetInnerHTML={{ __html: mota }}></div>
 
       </div>
