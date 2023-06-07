@@ -34,7 +34,6 @@ import AddCateProd from "./component/admin/AddCateProd"
 import EditCateProd from "./component/admin/EditCateProd";
 import EditReview from "./component/admin/EditReview";
 import AddContact from "./component/admin/AddContact";
-import BlogAll from "./component/BlogAll"
 
 function Layout({ children }) {
   return (
@@ -66,7 +65,6 @@ function App() {
         <Route path="/account/user" element={<Layout><AccountUser /></Layout>} />
         <Route path="/account/cart" element={<Layout><AccountCart /></Layout>} />
         <Route path="/account/edit" element={<Layout><AccountEdit /></Layout>} />
-        <Route path="/blog" element={<Layout><BlogAll/></Layout>}/>
         {/* <Route path="/products/:id" element={<Product />} />
           <Route path="/admin" element={<ProductList />} /> */}
         {/* <Route path="/login" element={<Login />} />

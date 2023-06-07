@@ -66,7 +66,7 @@ function App() {
         <Route path="/account/user" element={<Layout><AccountUser /></Layout>} />
         <Route path="/account/cart" element={<Layout><AccountCart /></Layout>} />
         <Route path="/account/edit" element={<Layout><AccountEdit /></Layout>} />
-        <Route path="/blog" element={<Layout><BlogAll/></Layout>}/>
+        
         {/* <Route path="/products/:id" element={<Product />} />
           <Route path="/admin" element={<ProductList />} /> */}
         {/* <Route path="/login" element={<Login />} />
