@@ -1075,10 +1075,10 @@ form .fieldSearch .search__button.fieldSearch__button,
 
 #back-to-top {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 65px;
-  height: 65px;
+  bottom: 90px;
+  right: 10px;
+  width: 60px;
+  height: 60px;
   background-color: #00ffe745;
   border-radius: 50%;
   display: flex;
