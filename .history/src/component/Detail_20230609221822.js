@@ -201,11 +201,15 @@ export default function Detail() {
         );
         product.imgConUrls = imgUrls;
       }
-     if (product.img) {
-      const storageRef = ref(storage, `product/${product.img}`);
-      const imgUrl = await getDownloadURL(storageRef);
-      product.imgUrl = imgUrl;
-    }
+      await Promise.all(
+        response.data.product.map(async (prod) => {
+          if (prod.img) {
+            const storageRef = ref(storage, `product/${prod.img}`);
+            const imgUrl = await getDownloadURL(storageRef);
+            prod.img = imgUrl;
+          }
+        })
+      );
       await Promise.all(
         response.data.relatedProducts.map(async (prod) => {
           if (prod.img) {

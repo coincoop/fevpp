@@ -201,11 +201,7 @@ export default function Detail() {
         );
         product.imgConUrls = imgUrls;
       }
-     if (product.img) {
-      const storageRef = ref(storage, `product/${product.img}`);
-      const imgUrl = await getDownloadURL(storageRef);
-      product.imgUrl = imgUrl;
-    }
+    v
       await Promise.all(
         response.data.relatedProducts.map(async (prod) => {
           if (prod.img) {
