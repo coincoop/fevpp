@@ -430,7 +430,7 @@ export default function Detail() {
                     />
                     <meta property="og:description" content={product.mota} />
                     <meta property="og:image" content={product.img} />
-                    <meta property="og:url" content={productUrl} />
+                    <meta property="og:url" content={window.location.href} />
                   </Helmet>
                   <div class="title-info">
                     {product.thuonghieu && (

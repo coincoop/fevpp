@@ -216,7 +216,7 @@ export default function Detail() {
       console.error(error);
     }
   };
-  const productUrl = window.location.href;
+  const productUrl = `window.location.href`;
   const productUrl1 = `https://gearvn.com/products/gvn-titan-i3060ti`;
   const handleAddtocart = () => {
     dispatch(addProduct({ product, quantity }));
@@ -430,7 +430,7 @@ export default function Detail() {
                     />
                     <meta property="og:description" content={product.mota} />
                     <meta property="og:image" content={product.img} />
-                    <meta property="og:url" content={productUrl} />
+                    <meta property="og:url" content={window.location.href} />
                   </Helmet>
                   <div class="title-info">
                     {product.thuonghieu && (

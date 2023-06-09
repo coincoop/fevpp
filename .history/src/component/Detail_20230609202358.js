@@ -563,7 +563,7 @@ export default function Detail() {
                     <ul>
                       <li className="facebook">
                         <FacebookShareButton url={productUrl}>
-                          <i className="fa fa-facebook"></i>
+                          <i className="fab fa-facebook"></i>
                         </FacebookShareButton>
                       </li>
                       <li className="twitter">

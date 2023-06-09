@@ -185,7 +185,7 @@ export default function Detail() {
       const response = await axios.get(`${API_URL}${url}`);
       const product = response.data.product;
       const imgCon = product.img_con;
-
+  
       if (imgCon) {
         const imgUrls = await Promise.all(
           imgCon.split(",").map(async (img) => {
@@ -216,7 +216,7 @@ export default function Detail() {
       console.error(error);
     }
   };
-  const productUrl = window.location.href;
+  const productUrl = `${API_URL}product/${product.url}`;
   const productUrl1 = `https://gearvn.com/products/gvn-titan-i3060ti`;
   const handleAddtocart = () => {
     dispatch(addProduct({ product, quantity }));
@@ -237,7 +237,7 @@ export default function Detail() {
     const tenkhs = [];
     for (let i = 0; i < makhArray.length; i++) {
       const response = await axios.get(`${API_URL}account/${makhArray[i]}`, {
-        headers: { token: accessToken },
+        headers: { token: accessToken }
       });
       tenkhs.push(response.data);
       setIsLoading(false);
@@ -378,11 +378,7 @@ export default function Detail() {
   // };
 
   if (isLoading) {
-    return (
-      <div className="load">
-        <div class="loader" />
-      </div>
-    );
+    return<div className="load"><div class="loader" /></div>;
   } else {
     return (
       <>
@@ -395,7 +391,7 @@ export default function Detail() {
                     <div>
                       {product && product.img_con && (
                         <ImageGallery
-                          items={product?.imgConUrls}
+                        items={product?.imgConUrls}
                           showNav={false}
                           showPlayButton={false}
                           showFullscreenButton={false}
@@ -424,13 +420,10 @@ export default function Detail() {
                 <div class="col-lg-5 col-md-12">
                   <Helmet>
                     <title>{`${product.tensp} - Vpp Phú Cường`}</title>
-                    <meta
-                      property="og:title"
-                      content={`${product.tensp} - Vpp Phú Cường`}
-                    />
-                    <meta property="og:description" content={product.mota} />
-                    <meta property="og:image" content={product.img} />
-                    <meta property="og:url" content={productUrl} />
+                    <meta property="og:title" content={`${product.tensp} - Vpp Phú Cường`} />
+        <meta property="og:description" content={product.mota} />
+        <meta property="og:image" content={product.hinh_anh} />
+        <meta property="og:url" content={window.location.href} />
                   </Helmet>
                   <div class="title-info">
                     {product.thuonghieu && (
@@ -449,7 +442,7 @@ export default function Detail() {
                   </div>
                   <div class="contain-price">
                     <div class="price-regular">
-                      {product.giacu && product.giacu > 0 ? (
+                      {product.giacu && product.giacu >0? (
                         <div>
                           <span
                             style={{ fontSize: "16px", display: "block" }}
@@ -475,6 +468,7 @@ export default function Detail() {
                       )}
                     </div>
                     <div class="price-sale">{/* developing */}</div>
+                    
                   </div>
                   {product.donvitinh && <p>Đơn vị tính: {product.donvitinh}</p>}
                   {product.donggoi && <p>Đóng gói: {product.donggoi}</p>}
@@ -761,10 +755,10 @@ export default function Detail() {
                     {currentProducts.map((product) => (
                       <div class="col-lg-2 col-md-3 col-6 container-card">
                         <div style={{ position: "relative" }}>
-                          {product.giacu && product.giacu > 0 ? (
-                            <div className="sale">Sale</div>
-                          ) : null}
-                        </div>
+                {product.giacu && product.giacu > 0 ? (
+                  <div className="sale">Sale</div>
+                ) : null}
+              </div>
                         <div class="img-product">
                           <Link
                             to={`/product/${product.url}`}
