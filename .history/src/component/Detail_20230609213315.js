@@ -437,9 +437,6 @@ export default function Detail() {
                       property="og:title"
                       content={`${product.tensp} - Vpp Phú Cường`}
                     />
-                    <meta property="og:image" content={product.img} />
-                    <meta property="og:url" content={`${window.location.href}/product/${product.url}`} />
-
                     {product.mota && (
                       <meta
                         property="og:description"
@@ -447,8 +444,12 @@ export default function Detail() {
                         dangerouslySetInnerHTML={{ __html: product.mota }}
                       />
                     )}
+                    <meta property="og:image" content={product.img} />
+                    <meta
+                      property="og:url"
+                      content={`dangerouslySetInnerHTML={{ __html: product.mota }}`}
+                    />
                   </Helmet>
-
                   <div class="title-info">
                     {product.thuonghieu && (
                       <p>Thương hiệu: {product.thuonghieu}</p>

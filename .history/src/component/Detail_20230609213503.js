@@ -438,8 +438,7 @@ export default function Detail() {
                       content={`${product.tensp} - Vpp Phú Cường`}
                     />
                     <meta property="og:image" content={product.img} />
-                    <meta property="og:url" content={`${window.location.href}/product/${product.url}`} />
-
+                    <meta property="og:url" content={`window.location.href`} />
                     {product.mota && (
                       <meta
                         property="og:description"

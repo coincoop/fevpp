@@ -202,7 +202,7 @@ export default function Detail() {
         product.imgConUrls = imgUrls;
       }
       await Promise.all(
-        response.data.product.map(async (prod) => {
+        response.data.map(async (prod) => {
           if (prod.img) {
             const storageRef = ref(storage, `product/${prod.img}`);
             const imgUrl = await getDownloadURL(storageRef);
@@ -226,7 +226,7 @@ export default function Detail() {
     }
   };
   const productUrl = window.location.href;
-
+ 
   const handleAddtocart = () => {
     dispatch(addProduct({ product, quantity }));
     console.log("added");
@@ -437,18 +437,10 @@ export default function Detail() {
                       property="og:title"
                       content={`${product.tensp} - Vpp Phú Cường`}
                     />
+                    <meta property="og:description" content={product.mota} />
                     <meta property="og:image" content={product.img} />
-                    <meta property="og:url" content={`${window.location.href}/product/${product.url}`} />
-
-                    {product.mota && (
-                      <meta
-                        property="og:description"
-                        content={product.mota}
-                        dangerouslySetInnerHTML={{ __html: product.mota }}
-                      />
-                    )}
+                    <meta property="og:url" content={`dangerouslySetInnerHTML={{ __html: product.mota }}`} />
                   </Helmet>
-
                   <div class="title-info">
                     {product.thuonghieu && (
                       <p>Thương hiệu: {product.thuonghieu}</p>

@@ -226,7 +226,7 @@ export default function Detail() {
     }
   };
   const productUrl = window.location.href;
-
+ 
   const handleAddtocart = () => {
     dispatch(addProduct({ product, quantity }));
     console.log("added");
@@ -432,22 +432,18 @@ export default function Detail() {
                 </div>
                 <div class="col-lg-5 col-md-12">
                   <Helmet>
-                    <title>{`${product.tensp} - Vpp Phú Cường`}</title>
-                    <meta
-                      property="og:title"
-                      content={`${product.tensp} - Vpp Phú Cường`}
-                    />
-                    <meta property="og:image" content={product.img} />
-                    <meta property="og:url" content={`${window.location.href}/product/${product.url}`} />
-
-                    {product.mota && (
-                      <meta
-                        property="og:description"
-                        content={product.mota}
-                        dangerouslySetInnerHTML={{ __html: product.mota }}
-                      />
-                    )}
-                  </Helmet>
+  <title>{`${product.tensp} - Vpp Phú Cường`}</title>
+  <meta property="og:title" content={`${product.tensp} - Vpp Phú Cường`} />
+  <meta property="og:image" content={product.img} />
+  <meta property="og:url" content={window.location.href} />
+  {product.mota && (
+    <meta
+      property="og:description"
+      content={product.mota}
+      dangerouslySetInnerHTML={{ __html: product.mota }}
+    />
+  )}
+</Helmet>
 
                   <div class="title-info">
                     {product.thuonghieu && (
