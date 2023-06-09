@@ -428,19 +428,12 @@ form .fieldSearch .search__button.fieldSearch__button,
     display: none;
     visibility: hidden;
   }
-  
 }
 
 @media screen and (max-width: 844px) {
   .collection-select-search {
     display: none;
     visibility: hidden;
-  }
-  .header__heading-text {
-    min-width: 180px;
-  }
-  .centercart {
-    top: 70%
   }
 }
 
@@ -963,9 +956,6 @@ form .fieldSearch .search__button.fieldSearch__button,
   .ant-modal-content {
     width: 90%;
     height: auto;
-  }
-  .header-icon .header-sign {
-    padding-right: 0;
   }
   .ant-qrcode {
     width: 300px;

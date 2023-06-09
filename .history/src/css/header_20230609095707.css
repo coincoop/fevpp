@@ -964,9 +964,7 @@ form .fieldSearch .search__button.fieldSearch__button,
     width: 90%;
     height: auto;
   }
-  .header-icon .header-sign {
-    padding-right: 0;
-  }
+  .header-icon .header-sign {}
   .ant-qrcode {
     width: 300px;
   }

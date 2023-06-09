@@ -124,7 +124,7 @@ h6 {
 
 .centercart {
   position: absolute;
-  top: 65%;
+  top: 55%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
@@ -133,10 +133,7 @@ h6 {
 @media screen and (max-width: 768px) {
   .centercart {
 
-    top: 80%;
+    top: 60%;
 
-  }
-  .card {
-    height: 70vh;
   }
 }

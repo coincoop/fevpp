@@ -440,7 +440,7 @@ form .fieldSearch .search__button.fieldSearch__button,
     min-width: 180px;
   }
   .centercart {
-    top: 70%
+    top
   }
 }
 
@@ -963,9 +963,6 @@ form .fieldSearch .search__button.fieldSearch__button,
   .ant-modal-content {
     width: 90%;
     height: auto;
-  }
-  .header-icon .header-sign {
-    padding-right: 0;
   }
   .ant-qrcode {
     width: 300px;
