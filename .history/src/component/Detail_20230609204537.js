@@ -216,7 +216,7 @@ export default function Detail() {
       console.error(error);
     }
   };
-  const productUrl = `window.location.href/product/${product.url}`;
+  const productUrl = window.location.href/;
   const productUrl1 = `https://gearvn.com/products/gvn-titan-i3060ti`;
   const handleAddtocart = () => {
     dispatch(addProduct({ product, quantity }));
