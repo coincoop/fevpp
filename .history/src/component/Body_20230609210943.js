@@ -18,9 +18,9 @@ export default function Body() {
         <meta property="og:image" content={`%PUBLIC_URL%/stationery.png`} />
         <meta
                       property="og:title"
-                      content={`Vpp Phú Cường`}
+                      content={`${product.tensp} - Vpp Phú Cường`}
                     />
-                    <meta property="og:description" content={`Trang bán hàng vpp online`} />
+                    <meta property="og:description" content={product.mota} />
       </Helmet>
       <SlideHeader />
       <Service />

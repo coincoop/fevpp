@@ -202,15 +202,6 @@ export default function Detail() {
         product.imgConUrls = imgUrls;
       }
       await Promise.all(
-        response.data.map(async (prod) => {
-          if (prod.img) {
-            const storageRef = ref(storage, `product/${prod.img}`);
-            const imgUrl = await getDownloadURL(storageRef);
-            prod.img = imgUrl;
-          }
-        })
-      );
-      await Promise.all(
         response.data.relatedProducts.map(async (prod) => {
           if (prod.img) {
             const storageRef = ref(storage, `product/${prod.img}`);
@@ -225,8 +216,8 @@ export default function Detail() {
       console.error(error);
     }
   };
-  const productUrl = window.location.href;
- 
+  const productUrl = `window.location.href;
+  const productUrl1 = `https://gearvn.com/products/gvn-titan-i3060ti`;
   const handleAddtocart = () => {
     dispatch(addProduct({ product, quantity }));
     console.log("added");
@@ -439,7 +430,7 @@ export default function Detail() {
                     />
                     <meta property="og:description" content={product.mota} />
                     <meta property="og:image" content={product.img} />
-                    <meta property="og:url" content={`dangerouslySetInnerHTML={{ __html: product.mota }}`} />
+                    <meta property="og:url" content={productUrl} />
                   </Helmet>
                   <div class="title-info">
                     {product.thuonghieu && (

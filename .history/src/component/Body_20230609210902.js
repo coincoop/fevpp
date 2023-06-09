@@ -16,11 +16,6 @@ export default function Body() {
       <Helmet>
         <title>Vpp Phú Cường</title>
         <meta property="og:image" content={`%PUBLIC_URL%/stationery.png`} />
-        <meta
-                      property="og:title"
-                      content={`Vpp Phú Cường`}
-                    />
-                    <meta property="og:description" content={`Trang bán hàng vpp online`} />
       </Helmet>
       <SlideHeader />
       <Service />
