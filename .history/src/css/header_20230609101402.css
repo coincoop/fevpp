@@ -911,12 +911,6 @@ form .fieldSearch .search__button.fieldSearch__button,
     right: 0px;
   }
 
-  form .fieldSearch .search__button.fieldSearch__button,
-.collection-select-search,
-.search__button.fieldSearch__button {
-  
-  margin-right: 30px;
-}
   .nav-content.active {
     display: block;
   }

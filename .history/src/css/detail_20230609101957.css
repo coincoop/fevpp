@@ -598,8 +598,15 @@
     padding: 15px;
   }
   
-  #mid .comment {
-    width: 100%;
+  #mid input[type="text"] {
+    background-color: rgb(252, 243, 252);
+    outline: none;
+    border-color: white;
+    width: 400px;
+    height: 90px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 2px solid rgb(163, 161, 161);
   }
 }
 @keyframes rotation {

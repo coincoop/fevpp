@@ -914,8 +914,10 @@ form .fieldSearch .search__button.fieldSearch__button,
   form .fieldSearch .search__button.fieldSearch__button,
 .collection-select-search,
 .search__button.fieldSearch__button {
-  
-  margin-right: 30px;
+  display: inline;
+  margin-top: 13px;
+  float: right;
+  margin-right: 20px;
 }
   .nav-content.active {
     display: block;

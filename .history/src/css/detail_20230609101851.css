@@ -594,13 +594,7 @@
   text-align: center;
 }
 @media screen and (max-width: 768px) {
-  #mid {
-    padding: 15px;
-  }
   
-  #mid .comment {
-    width: 100%;
-  }
 }
 @keyframes rotation {
   from {

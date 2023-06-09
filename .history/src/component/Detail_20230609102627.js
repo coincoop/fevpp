@@ -670,7 +670,7 @@ export default function Detail() {
                         <textarea
                           rows="5"
                           cols="50"
-                          className="comment"
+                          
                           value={comment}
                           onChange={(event) => {
                             const newValue = event.target.value;
