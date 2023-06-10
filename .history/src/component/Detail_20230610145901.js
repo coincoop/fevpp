@@ -434,9 +434,7 @@ export default function Detail() {
                 <div class="col-lg-5 col-md-12">
                   <Helmet>
                     <title>{`${product.tensp} - Vpp Phú Cường`}</title>
-                    <meta name="description" content={product.mota}></meta>
                     <meta property="og:type" content="article"></meta>
-                    <meta property="og:locale" content="vi_VN"></meta>
                     <meta
                       property="og:title"
                       content={`${product.tensp} - Vpp Phú Cường`}
@@ -447,13 +445,6 @@ export default function Detail() {
                     {product.mota && (
                       <meta property="og:description" content={product.mota} />
                     )}
-                    <meta property="twitter:title" content="" />
-                    <meta
-                      property="twitter:description"
-                      content={`${product.tensp} - Vpp Phú Cường`}
-                    />
-                    <meta property="twitter:image" content={product.imgUrl} />
-                    <meta name="twitter:card" content="summary_large_image" />
                   </Helmet>
 
                   <div class="title-info">

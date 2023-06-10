@@ -448,12 +448,9 @@ export default function Detail() {
                       <meta property="og:description" content={product.mota} />
                     )}
                     <meta property="twitter:title" content="" />
-                    <meta
-                      property="twitter:description"
-                      content={`${product.tensp} - Vpp Phú Cường`}
-                    />
-                    <meta property="twitter:image" content={product.imgUrl} />
-                    <meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:description" content={`${product.tensp} - Vpp Phú Cường`} />
+<meta property="twitter:image" content={product.imgUrl} />
+<meta name="twitter:card" content="summary_large_image"/>
                   </Helmet>
 
                   <div class="title-info">
