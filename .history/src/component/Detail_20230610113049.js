@@ -10,12 +10,7 @@ import { Helmet } from "react-helmet";
 import { addProduct } from "../redux/slice";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../redux/apiRequest.js";
-import {
-  FacebookShareButton,
-  TwitterShareButton,
-  PinterestShareButton,
-  WhatsappShareButton,
-} from "react-share";
+import { FacebookShareButton } from "react-share";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { animateScroll as scroll } from "react-scroll";
@@ -206,11 +201,11 @@ export default function Detail() {
         );
         product.imgConUrls = imgUrls;
       }
-      if (product.img) {
-        const storageRef = ref(storage, `product/${product.img}`);
-        const imgUrl = await getDownloadURL(storageRef);
-        product.imgUrl = imgUrl;
-      }
+     if (product.img) {
+      const storageRef = ref(storage, `product/${product.img}`);
+      const imgUrl = await getDownloadURL(storageRef);
+      product.imgUrl = imgUrl;
+    }
       await Promise.all(
         response.data.relatedProducts.map(async (prod) => {
           if (prod.img) {
@@ -439,10 +434,7 @@ export default function Detail() {
                       content={`${product.tensp} - Vpp Phú Cường`}
                     />
                     <meta property="og:image" content={product.img} />
-                    <meta
-                      property="og:url"
-                      content={`${window.location.href}/product/${product.url}`}
-                    />
+                    <meta property="og:url" content={`${window.location.href}/product/${product.url}`} />
 
                     {product.mota && (
                       <meta
@@ -583,39 +575,23 @@ export default function Detail() {
                     <span>Chia sẻ: </span>
                     <ul>
                       <li className="facebook">
-                        <FacebookShareButton
-                          url={window.location.href}
-                          quote={product.tensp}
-                          picture={product.img}
-                        >
+                        <FacebookShareButton url={productUrl}
+                        url={shareUrl}
+        quote={title}
+        picture={
+          "https://pixabay.com/photos/football-sport-play-competition-4455306/"
+        }>
                           <i className="fa fa-facebook"></i>
                         </FacebookShareButton>
                       </li>
                       <li className="twitter">
-                        <TwitterShareButton
-                          url={window.location.href}
-                          title={product.tensp}
-                          hashtags={["vppphucuong", "vpp", "product"]}
-                        >
-                          <i className="fa-brands fa-twitter"></i>
-                        </TwitterShareButton>
+                        <i class="fa-brands fa-twitter"></i>
                       </li>
                       <li className="pinterest">
-                        <PinterestShareButton
-                          url={window.location.href}
-                          media={product.img}
-                          description={product.tensp}
-                        >
-                          <i className="fa-brands fa-pinterest"></i>
-                        </PinterestShareButton>
+                        <i class="fa-brands fa-pinterest"></i>
                       </li>
-                      <li className="whatsapp">
-                        <WhatsappShareButton
-                          url={window.location.href}
-                          title={product.tensp}
-                        >
-                          <i className="fa-brands fa-whatsapp"></i>
-                        </WhatsappShareButton>
+                      <li className="instagram">
+                        <i class="fa-brands fa-instagram"></i>
                       </li>
                     </ul>
                   </div>
