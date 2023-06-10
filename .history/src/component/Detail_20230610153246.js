@@ -450,7 +450,7 @@ export default function Detail() {
                     <meta property="twitter:title" content={`${product.tensp} - Vpp Phú Cường`} />
                     <meta
                       property="twitter:description"
-                      content={product.mota}
+                      content={`${product.tensp} - Vpp Phú Cường`}
                     />
                     <meta property="twitter:image" content={product.imgUrl} />
                     <meta name="twitter:card" content="summary_large_image" />
