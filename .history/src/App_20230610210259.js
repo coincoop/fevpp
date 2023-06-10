@@ -35,7 +35,7 @@ import EditCateProd from "./component/admin/EditCateProd";
 import EditReview from "./component/admin/EditReview";
 import AddContact from "./component/admin/AddContact";
 import BlogAll from "./component/BlogAll"
-import { Helmet, HelmetProvider } from "react-helmet-async";
+
 function Layout({ children }) {
   return (
     <>
@@ -48,22 +48,6 @@ function Layout({ children }) {
 function App() {
   return (
 <>
-<HelmetProvider>
-        <Helmet>
-          <title>Vpp Phú Cường</title>
-          <meta
-            property="og:image"
-            content="https://cdn-icons-png.flaticon.com/256/1930/1930026.png"
-          />
-          <meta property="og:image:width" content="436" />
-          <meta property="og:image:height" content="228" />
-          <meta property="og:title" content={`Vpp Phú Cường`} />
-          <meta
-            property="og:description"
-            content={`Trang bán hàng vpp`}
-          />
-        </Helmet>
-      </HelmetProvider>
     <BrowserRouter>
       <Routes>
 

@@ -35,7 +35,7 @@ import EditCateProd from "./component/admin/EditCateProd";
 import EditReview from "./component/admin/EditReview";
 import AddContact from "./component/admin/AddContact";
 import BlogAll from "./component/BlogAll"
-import { Helmet, HelmetProvider } from "react-helmet-async";
+
 function Layout({ children }) {
   return (
     <>
