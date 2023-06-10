@@ -64,7 +64,7 @@ function App() {
             content={`Trang bán hàng vpp`}
           />
         </Helmet>
-      
+      </HelmetProvider>
     <BrowserRouter>
       <Routes>
 
@@ -111,7 +111,7 @@ function App() {
 
       </Routes>
     </BrowserRouter>
-    </HelmetProvider>
+ 
 </>
   );
 }

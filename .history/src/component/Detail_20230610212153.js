@@ -227,7 +227,15 @@ export default function Detail() {
       console.error(error);
     }
   };
-  
+  const updateMetaTags = () => {
+    setMetaTags({
+      title: `${product.tensp} - Vpp Phú Cường`,
+      description: product.mota,
+      ogImage: product.imgUrl,
+      ogImageWidth: '436',
+      ogImageHeight: '228',
+    });
+  };
   const productUrl = window.location.href;
 
   const handleAddtocart = () => {

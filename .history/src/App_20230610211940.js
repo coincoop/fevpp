@@ -46,7 +46,13 @@ function Layout({ children }) {
   );
 }
 function App() {
-  
+  const [metaTags, setMetaTags] = useState({
+    title: 'Vpp Phú Cường',
+    description: 'Trang bán hàng vpp online',
+    ogImage: 'https://cdn-icons-png.flaticon.com/256/1930/1930026.png',
+    ogImageWidth: '436',
+    ogImageHeight: '228',
+  });
   return (
 <>
 <HelmetProvider>
@@ -64,7 +70,7 @@ function App() {
             content={`Trang bán hàng vpp`}
           />
         </Helmet>
-      
+      </HelmetProvider>
     <BrowserRouter>
       <Routes>
 
@@ -111,7 +117,7 @@ function App() {
 
       </Routes>
     </BrowserRouter>
-    </HelmetProvider>
+ 
 </>
   );
 }

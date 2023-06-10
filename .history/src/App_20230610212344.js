@@ -111,7 +111,7 @@ function App() {
 
       </Routes>
     </BrowserRouter>
-    </HelmetProvider>
+ 
 </>
   );
 }
