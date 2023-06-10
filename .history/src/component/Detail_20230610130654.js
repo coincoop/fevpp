@@ -441,7 +441,7 @@ export default function Detail() {
                     <meta property="og:image" content={product.img} />
                     <meta
                       property="og:url"
-                      content={window.location.href}
+                      content={`${window.location.href}/product/${product.url}`}
                     />
 
                     {product.mota && (
