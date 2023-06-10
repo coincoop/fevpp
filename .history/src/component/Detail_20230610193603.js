@@ -436,7 +436,7 @@ export default function Detail() {
                   <HelmetProvider>
                     <Helmet>
                       <title>{`${product.tensp} - Vpp Phú Cường`}</title>
-                      <meta name="description" content={product.mota} data-rh="true"/>
+                      <meta name="description" content={product.mota} />
                       <meta property="og:type" content="article" />
                       <meta property="og:locale" content="vi_VN" />
                       <meta
@@ -452,7 +452,6 @@ export default function Detail() {
                         <meta
                           property="og:description"
                           content={product.mota}
-                          data-rh="true"
                         />
                       )}
                       <meta

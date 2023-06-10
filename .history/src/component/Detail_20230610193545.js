@@ -436,15 +436,15 @@ export default function Detail() {
                   <HelmetProvider>
                     <Helmet>
                       <title>{`${product.tensp} - Vpp Phú Cường`}</title>
-                      <meta name="description" content={product.mota} data-rh="true"/>
+                      <meta name="description" content={product.mota} />
                       <meta property="og:type" content="article" />
                       <meta property="og:locale" content="vi_VN" />
                       <meta
                         property="og:title"
                         content={`${product.tensp} - Vpp Phú Cường`}
-                        data-rh="true"
+                        
                       />
-                      <meta property="og:image" content={product.imgUrl} data-rh="true"/>
+                      <meta property="og:image" content={product.imgUrl} />
                       <meta property="og:image:width" content="436" />
                       <meta property="og:image:height" content="228" />
                       <meta property="og:url" content={window.location.href} />
@@ -452,7 +452,6 @@ export default function Detail() {
                         <meta
                           property="og:description"
                           content={product.mota}
-                          data-rh="true"
                         />
                       )}
                       <meta

@@ -452,7 +452,6 @@ export default function Detail() {
                         <meta
                           property="og:description"
                           content={product.mota}
-                          data-rh="true"
                         />
                       )}
                       <meta
