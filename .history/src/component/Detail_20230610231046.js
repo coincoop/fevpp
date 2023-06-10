@@ -194,24 +194,19 @@ export default function Detail() {
   // Cập nhật description
   const descriptionElement = document.querySelector('meta[name="description"]');
   if (descriptionElement) {
-    descriptionElement.setAttribute('content', product.mota);
+    descriptionElement.setAttribute('content', '{product.mota');
   }
 
   // Cập nhật og:title
   const ogTitleElement = document.querySelector('meta[property="og:title"]');
   if (ogTitleElement) {
-    ogTitleElement.setAttribute('content', product.tensp);
+    ogTitleElement.setAttribute('content', 'Tiêu đề Open Graph mới');
   }
 
   // Cập nhật og:description
   const ogDescriptionElement = document.querySelector('meta[property="og:description"]');
   if (ogDescriptionElement) {
-    ogDescriptionElement.setAttribute('content', product.mota);
-  }
-
-  const ogimageElement = document.querySelector('meta[property="og:image"]');
-  if (ogimageElement) {
-    ogimageElement.setAttribute('content', product.imgUrl);
+    ogDescriptionElement.setAttribute('content', 'Mô tả Open Graph mới');
   }
   }, [url]);
   const fetchData = async () => {

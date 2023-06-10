@@ -208,11 +208,6 @@ export default function Detail() {
   if (ogDescriptionElement) {
     ogDescriptionElement.setAttribute('content', product.mota);
   }
-
-  const ogimageElement = document.querySelector('meta[property="og:image"]');
-  if (ogimageElement) {
-    ogimageElement.setAttribute('content', product.imgUrl);
-  }
   }, [url]);
   const fetchData = async () => {
     try {

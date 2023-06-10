@@ -209,9 +209,9 @@ export default function Detail() {
     ogDescriptionElement.setAttribute('content', product.mota);
   }
 
-  const ogimageElement = document.querySelector('meta[property="og:image"]');
-  if (ogimageElement) {
-    ogimageElement.setAttribute('content', product.imgUrl);
+  const ogDescriptionElement = document.querySelector('meta[property="og:description"]');
+  if (ogDescriptionElement) {
+    ogDescriptionElement.setAttribute('content', product.mota);
   }
   }, [url]);
   const fetchData = async () => {

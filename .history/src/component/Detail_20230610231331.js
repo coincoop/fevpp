@@ -211,7 +211,7 @@ export default function Detail() {
 
   const ogimageElement = document.querySelector('meta[property="og:image"]');
   if (ogimageElement) {
-    ogimageElement.setAttribute('content', product.imgUrl);
+    ogimageElement.setAttribute('content', product.imgUr);
   }
   }, [url]);
   const fetchData = async () => {
