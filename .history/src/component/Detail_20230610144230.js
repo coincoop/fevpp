@@ -435,7 +435,6 @@ export default function Detail() {
                   <Helmet>
                 
                     <title>{`${product.tensp} - Vpp Phú Cường`}</title>
-                    <meta property="og:type" content="article"></meta>
                     <meta
                       property="og:title"
                       content={`${product.tensp} - Vpp Phú Cường`}
