@@ -22,7 +22,6 @@ export default function Body() {
         <meta property="og:title" content={`Vpp Phú Cường`} />
         <meta property="og:description" content={`Trang bán hàng vpp online`} />
       </Helmet>
-      </HelmetProvider>
       <SlideHeader />
       <Service />
 

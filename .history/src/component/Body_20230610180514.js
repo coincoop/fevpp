@@ -13,7 +13,6 @@ import PartnerSlider from "./body/Partner";
 export default function Body() {
   return (
     <div>
-      <HelmetProvider>
       <Helmet>
         <title>Vpp Phú Cường</title>
         <meta property="og:image" content="https://cdn-icons-png.flaticon.com/256/1930/1930026.png" />
@@ -22,7 +21,6 @@ export default function Body() {
         <meta property="og:title" content={`Vpp Phú Cường`} />
         <meta property="og:description" content={`Trang bán hàng vpp online`} />
       </Helmet>
-      </HelmetProvider>
       <SlideHeader />
       <Service />
 
