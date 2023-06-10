@@ -433,7 +433,7 @@ export default function Detail() {
                 </div>
                 <div class="col-lg-5 col-md-12">
                   <Helmet>
-                  <meta name='description' content={product.mota} />
+                  <meta name='description' content={description} />
                     <title>{`${product.tensp} - Vpp Phú Cường`}</title>
                     <meta
                       property="og:title"

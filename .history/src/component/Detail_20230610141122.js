@@ -433,25 +433,16 @@ export default function Detail() {
                 </div>
                 <div class="col-lg-5 col-md-12">
                   <Helmet>
-                  <meta name='description' content={product.mota} />
+                    <meta name="description" content={product.mota} />
                     <title>{`${product.tensp} - Vpp Phú Cường`}</title>
                     <meta
                       property="og:title"
                       content={`${product.tensp} - Vpp Phú Cường`}
                     />
                     <meta property="og:image" content={product.imgUrl} />
-                    <meta
-                      property="og:url"
-                      content={window.location.href}
-                    />
+                    <meta property="og:url" content={window.location.href} />
 
-                    {product.mota && (
-                      <meta
-                        property="og:description"
-                        content={product.mota}
-                        
-                      />
-                    )}
+                    <meta property="og:description" content={product.mota} />
                   </Helmet>
 
                   <div class="title-info">
@@ -584,10 +575,7 @@ export default function Detail() {
                     <span>Chia sẻ: </span>
                     <ul>
                       <li className="facebook">
-                        <FacebookShareButton
-                          url={window.location.href}
-                         
-                        >
+                        <FacebookShareButton url={window.location.href}>
                           <i className="fa fa-facebook"></i>
                         </FacebookShareButton>
                       </li>

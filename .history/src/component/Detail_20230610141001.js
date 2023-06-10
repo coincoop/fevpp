@@ -6,7 +6,7 @@ import { useParams, Link } from "react-router-dom";
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
 import Currency from "./body/Currency";
-import { Helmet } from "react-helmet-async";
+import { Helmet } from "react-helmet-a";
 import { addProduct } from "../redux/slice";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../redux/apiRequest.js";
@@ -433,7 +433,6 @@ export default function Detail() {
                 </div>
                 <div class="col-lg-5 col-md-12">
                   <Helmet>
-                  <meta name='description' content={product.mota} />
                     <title>{`${product.tensp} - Vpp Phú Cường`}</title>
                     <meta
                       property="og:title"

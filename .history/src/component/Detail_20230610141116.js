@@ -445,7 +445,7 @@ export default function Detail() {
                       content={window.location.href}
                     />
 
-                    {product.mota && (
+                    
                       <meta
                         property="og:description"
                         content={product.mota}

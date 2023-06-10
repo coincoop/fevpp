@@ -442,16 +442,16 @@ export default function Detail() {
                     <meta property="og:image" content={product.imgUrl} />
                     <meta
                       property="og:url"
-                      content={window.location.href}
+                      content={window.location.zhref}
                     />
 
-                    {product.mota && (
+                    
                       <meta
                         property="og:description"
                         content={product.mota}
                         
                       />
-                    )}
+                    
                   </Helmet>
 
                   <div class="title-info">
