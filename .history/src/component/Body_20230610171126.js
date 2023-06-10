@@ -15,9 +15,7 @@ export default function Body() {
     <div>
       <Helmet>
         <title>Vpp Phú Cường</title>
-        <meta property="og:image" content="https://cdn-icons-png.flaticon.com/256/1930/1930026.png" />
-        <meta property="og:image:width" content="436"/>
-    <meta property="og:image:height" content="228"/>
+        <meta property="og:image" content={} />
         <meta property="og:title" content={`Vpp Phú Cường`} />
         <meta property="og:description" content={`Trang bán hàng vpp online`} />
       </Helmet>

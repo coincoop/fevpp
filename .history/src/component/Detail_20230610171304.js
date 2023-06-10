@@ -443,8 +443,8 @@ export default function Detail() {
                     />
                     
                     <meta property="og:image" content={product.imgUrl} />
-                    <meta property="og:image:width" content="436"/>
-    <meta property="og:image:height" content="228"/>
+                    <meta property="og:image:width" content="436">
+    <meta property="og:image:height" content="228"></meta>
                     <meta property="og:url" content={window.location.href} />
 
                     {product.mota && (
