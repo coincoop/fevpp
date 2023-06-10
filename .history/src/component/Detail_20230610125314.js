@@ -438,17 +438,17 @@ export default function Detail() {
                       property="og:title"
                       content={`${product.tensp} - Vpp Phú Cường`}
                     />
-                    <meta property="og:image" content={`https://pixabay.com/vi/photos/b%C3%B3ng-%C4%91%C3%A1-th%E1%BB%83-thao-ch%C6%A1i-cu%E1%BB%99c-thi-4455306/`} />
+                    <meta property="og:image" content={https://pixabay.com/vi/photos/b%C3%B3ng-%C4%91%C3%A1-th%E1%BB%83-thao-ch%C6%A1i-cu%E1%BB%99c-thi-4455306/} />
                     <meta
                       property="og:url"
-                      content={window.location.href}
+                      content={`${window.location.href}/product/${product.url}`}
                     />
 
                     {product.mota && (
                       <meta
                         property="og:description"
-                        content={product.tensp}
-                      
+                        content={product.mota}
+                        dangerouslySetInnerHTML={{ __html: product.mota }}
                       />
                     )}
                   </Helmet>

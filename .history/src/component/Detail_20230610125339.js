@@ -447,8 +447,8 @@ export default function Detail() {
                     {product.mota && (
                       <meta
                         property="og:description"
-                        content={product.tensp}
-                      
+                        content={product.mota}
+                        dangerouslySetInnerHTML={{ __html: product.mota }}
                       />
                     )}
                   </Helmet>
