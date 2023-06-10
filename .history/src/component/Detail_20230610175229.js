@@ -6,8 +6,7 @@ import { useParams, Link } from "react-router-dom";
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
 import Currency from "./body/Currency";
-import { Helmet, HelmetProvider } from "react-helmet-async";
-
+import { Helmet } from "react-helmet";
 import { addProduct } from "../redux/slice";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../redux/apiRequest.js";

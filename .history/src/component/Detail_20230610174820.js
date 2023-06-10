@@ -6,8 +6,7 @@ import { useParams, Link } from "react-router-dom";
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
 import Currency from "./body/Currency";
-import { Helmet, HelmetProvider } from "react-helmet-async";
-
+import { Helmet } from "react-helmet";
 import { addProduct } from "../redux/slice";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../redux/apiRequest.js";
@@ -433,31 +432,35 @@ export default function Detail() {
                   </div>
                 </div>
                 <div class="col-lg-5 col-md-12">
-                <HelmetProvider>
-  <Helmet>
-    <title>{`${product.tensp} - Vpp Phú Cường`}</title>
-    <meta name="description" content={product.mota} />
-    <meta property="og:type" content="article" />
-    <meta property="og:locale" content="vi_VN" />
-    <meta property="og:title" content={`${product.tensp} - Vpp Phú Cường`} />
-    <meta property="og:image" content={product.imgUrl} />
-    <meta property="og:image:width" content="436" />
-    <meta property="og:image:height" content="228" />
-    <meta property="og:url" content={window.location.href} />
-    {product.mota && (
-      <meta property="og:description" content={product.mota} />
-    )}
-    <meta
-      property="twitter:title"
-      content={`${product.tensp} - Vpp Phú Cường`}
-    />
-    <meta property="twitter:description" content={product.mota} />
-    <meta property="twitter:image" content={product.imgUrl} />
-    <meta name="twitter:card" content="summary_large_image" />
-  </Helmet>
+                  <Helmet>
+                    <title>{`${product.tensp} - Vpp Phú Cường`}</title>
+                    <meta name="description" content={product.mota}></meta>
+                    <meta property="og:type" content="article"></meta>
+                    <meta property="og:locale" content="vi_VN"></meta>
+                    <meta
+                      property="og:title"
+                      content={`${product.tensp} - Vpp Phú Cường`}
+                    />
 
-  {/* Nội dung của trang */}
-</HelmetProvider>
+                    <meta property="og:image" content={product.imgUrl} />
+                    <meta property="og:image:width" content="436" />
+                    <meta property="og:image:height" content="228" />
+                    <meta property="og:url" content={window.location.href} />
+
+                    {product.mota && (
+                      <meta property="og:description" content={product.mota} />
+                    )}
+                    <meta
+                      property="twitter:title"
+                      content={`${product.tensp} - Vpp Phú Cường`}
+                    />
+                    <meta
+                      property="twitter:description"
+                      content={product.mota}
+                    />
+                    <meta property="twitter:image" content={product.imgUrl} />
+                    <meta name="twitter:card" content="summary_large_image" />
+                  </Helmet>
 
                   <div class="title-info">
                     {product.thuonghieu && (
