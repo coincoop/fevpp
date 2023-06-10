@@ -464,6 +464,8 @@ export default function Detail() {
                       <meta property="twitter:image" content={product.imgUrl} />
                       <meta name="twitter:card" content="summary_large_image" />
                     </Helmet>
+
+                    {/* Nội dung của trang */}
                   </HelmetProvider>
 
                   <div class="title-info">
