@@ -986,25 +986,7 @@ form .fieldSearch .search__button.fieldSearch__button,
   .header__heading-text {
     min-width: 170px;
   }
-  .contact-section {
-    padding-bottom: 60px !important;
-  }
-  .contact-section a .tel {
-    width: 40px !important;
-    height: 40px !important;
-  }
-  .contact-section a .tel img, .contact-section a .zalo img {
-    width: 25px !important;
-  }
-  .contact-section a .zalo {
-    width: 40px !important;
-    height: 40px !important;
-  }
-  #back-to-top {
-    width: 50px !important;
-    height: 50px !important;
-    font-size: 20px !important;
-  }
+  
 }
 
 .site-nav__item a:hover {
