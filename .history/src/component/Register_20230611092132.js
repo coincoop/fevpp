@@ -35,7 +35,7 @@ export default function Register() {
             email: email,
             diachi: diachi,
             sodienthoai: sodienthoai,
-            vaitro: 0
+            va
         };
 
         try {

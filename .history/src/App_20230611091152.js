@@ -52,7 +52,7 @@ function App() {
   const accessToken = user?.accessToken;
   const vaitro = user?.vaitro
   console.log(accessToken);
-  if (!user ||   vaitro == 0 || !accessToken) {
+  if (!null ||   vaitro == 0) {
     return <div>
     <BrowserRouter>
       <Routes>

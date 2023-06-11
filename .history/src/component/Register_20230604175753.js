@@ -34,8 +34,7 @@ export default function Register() {
             matkhau: matkhau,
             email: email,
             diachi: diachi,
-            sodienthoai: sodienthoai,
-            vaitro: 0
+            sodienthoai: sodienthoai
         };
 
         try {
