@@ -9,7 +9,9 @@ import "bootstrap/dist/js/bootstrap.js";
 import { Provider } from "react-redux";
 import { persistor, store } from "./redux/store.js";
 import { PersistGate } from "redux-persist/integration/react";
-
+import { Provider } from "react-redux";
+import { persistor, store } from "./redux/store.js";
+import { PersistGate } from "redux-persist/integration/react";
 import { animateScroll as scroll } from 'react-scroll';
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

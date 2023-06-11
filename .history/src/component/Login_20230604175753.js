@@ -13,7 +13,7 @@ import { API_URL } from "../config";
 //Tùn
 export default function Login() {
   //maxu
-  
+  const user = useSelector((state) => state.user.login);
   const [username, setUsername] = useState("");
   const [matkhau, setPassword] = useState("");
   const dispatch = useDispatch();
@@ -41,11 +41,7 @@ export default function Login() {
       }
       dispatch(loginSuccess(res.data));
       dispatch(clearProduct());
-      if(res.data.vaitro == 1){
-        navigate('/admin')
-      }else{
-        navigate('/');
-      }
+      navigate('/');
       window.scrollTo(0, 0);
     } catch (error) {
       if (error.response) {

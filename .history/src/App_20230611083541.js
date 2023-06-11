@@ -35,7 +35,7 @@ import EditCateProd from "./component/admin/EditCateProd";
 import EditReview from "./component/admin/EditReview";
 import AddContact from "./component/admin/AddContact";
 import BlogAll from "./component/BlogAll"
-
+import NotFound from "./components/NotFound";
 import { useSelector } from "react-redux";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 function Layout({ children }) {
@@ -56,8 +56,8 @@ function App() {
     return <div>
     <BrowserRouter>
       <Routes>
-      <Route path="/admin/*" element={<Navigate to="/404" replace />} />
-      <Route path="/admin/*/*" element={<Navigate to="/404" replace />} />
+      <Route path="/*" element={<Navigate to="/404" replace />} />
+      <Route path="/*/*" element={<Navigate to="/404" replace />} />
       <Route path="/404" element={<NotFound />} />
       </Routes>
 

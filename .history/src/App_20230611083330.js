@@ -1,5 +1,5 @@
 
-import { BrowserRouter, Routes, Route, Navigate, useNavigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, Navigate, useNavigate } from "react-router-dom";
 // import Product from './component/Product';
 import Footer from './component/Footer';
 import Header from './component/Header';
@@ -35,8 +35,6 @@ import EditCateProd from "./component/admin/EditCateProd";
 import EditReview from "./component/admin/EditReview";
 import AddContact from "./component/admin/AddContact";
 import BlogAll from "./component/BlogAll"
-
-import { useSelector } from "react-redux";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 function Layout({ children }) {
   return (
@@ -48,22 +46,7 @@ function Layout({ children }) {
   );
 }
 function App() {
-  const user = useSelector((state) => state.user.login.currentUser);
-  const accessToken = user?.accessToken;
-  const vaitro = user?.vaitro
-  console.log(accessToken);
-  if (  vaitro == 0) {
-    return <div>
-    <BrowserRouter>
-      <Routes>
-      <Route path="/admin/*" element={<Navigate to="/404" replace />} />
-      <Route path="/admin/*/*" element={<Navigate to="/404" replace />} />
-      <Route path="/404" element={<NotFound />} />
-      </Routes>
-
-    </BrowserRouter>
-  </div>
-  } else {
+  
   return (
 <>
 <HelmetProvider>
@@ -131,7 +114,6 @@ function App() {
     </HelmetProvider>
 </>
   );
-        }
 }
 
 export default App;

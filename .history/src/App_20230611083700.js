@@ -56,8 +56,8 @@ function App() {
     return <div>
     <BrowserRouter>
       <Routes>
-      <Route path="/admin/*" element={<Navigate to="/404" replace />} />
-      <Route path="/admin/*/*" element={<Navigate to="/404" replace />} />
+      <Route path="/*" element={<Navigate to="/404" replace />} />
+      <Route path="/*/*" element={<Navigate to="/404" replace />} />
       <Route path="/404" element={<NotFound />} />
       </Routes>
 

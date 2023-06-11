@@ -108,23 +108,7 @@ function App() {
         {/* <Route path="add" element={<AddProduct />} />
           <Route path="/admin/edit/:id" element={<EditProduct />} /> */}
         <Route path="*" element={<Layout><NotFound /></Layout>} />
-        <Route path="/admin" element={<AdLayout />}></Route>
-        {/* <Route path="/product" element={<ProductList/>} />
-          <Route path="/menu" element={<MenuList/>} /> */}
-        <Route path="/admin/addmenu" element={<AddMenu />} />
-        <Route path="/admin/addproduct" element={<AddProduct />} />
-        <Route path="/admin/edit/:id" element={<EditMenu />} />
-        <Route path="/admin/editproduct/:id" element={<EditProduct />} />
-        <Route path="/admin/addhome" element={<AddHome />} />
-        <Route path="/admin/edithome/:id" element={<EditHome />} />
-        <Route path="/admin/addContact" element={<AddContact />} />
-        {/* <Route path="/edithome/:id" element={<EditHome />} /> */}
-        <Route path="/admin/addblog" element={<AddBlog />} />
-        <Route path="/admin/editblog/:idblog" element={<EditBlog />} />
-        <Route path="/admin/addCateProd" element={<AddCateProd />} />
-        <Route path="/admin/editCateProd/:id" element={<EditCateProd />} />
-        {/* <Route path="/addReview" element={<AddReview />} /> */}
-        <Route path="/admin/editReview/:id" element={<EditReview />} />
+        
 
       </Routes>
     </BrowserRouter>

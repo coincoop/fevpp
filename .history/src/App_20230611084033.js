@@ -52,12 +52,12 @@ function App() {
   const accessToken = user?.accessToken;
   const vaitro = user?.vaitro
   console.log(accessToken);
-  if (  vaitro == 0) {
+  if (  vaitro === 0) {
     return <div>
     <BrowserRouter>
       <Routes>
       <Route path="/admin/*" element={<Navigate to="/404" replace />} />
-      <Route path="/admin/*/*" element={<Navigate to="/404" replace />} />
+      <Route path="/*/*" element={<Navigate to="/404" replace />} />
       <Route path="/404" element={<NotFound />} />
       </Routes>
 
