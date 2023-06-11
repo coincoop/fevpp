@@ -613,7 +613,7 @@ export default function Detail() {
                     <span>Chia sẻ: </span>
                     <ul>
                       <li className="facebook">
-                        <FacebookShareButton url={window.location.href} imageUrl={product.imgUrl}>
+                        <FacebookShareButton url={window.location.href} >
                         <meta property="og:image" content={product.imgUrl} />
                           <i className="fa fa-facebook"></i>
                         </FacebookShareButton>
