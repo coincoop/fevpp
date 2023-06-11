@@ -26,6 +26,7 @@ import Tooltip from "rc-tooltip";
 import Modal from "react-modal";
 import { getDownloadURL, ref } from "firebase/storage";
 import { storage } from "../firebase";
+import Head from 'next/head';
 export default function Detail() {
   const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
@@ -227,37 +228,37 @@ export default function Detail() {
       console.error(error);
     }
   };
-  useEffect(() => {
-    if (product) {
-      const titleElement = document.querySelector("title");
-      if (titleElement) {
-        titleElement.textContent = `${product.tensp} - Vpp Phú Cường`;
-      }
+  // useEffect(() => {
+  //   if (product) {
+  //     const titleElement = document.querySelector("title");
+  //     if (titleElement) {
+  //       titleElement.textContent = `${product.tensp} - Vpp Phú Cường`;
+  //     }
   
-      // Cập nhật description
-      const descriptionElement = document.querySelector('meta[name="description"]');
-      if (descriptionElement) {
-        descriptionElement.setAttribute("content", `${product.mota}`);
-      }
+  //     // Cập nhật description
+  //     const descriptionElement = document.querySelector('meta[name="description"]');
+  //     if (descriptionElement) {
+  //       descriptionElement.setAttribute("content", `${product.mota}`);
+  //     }
   
-      // Cập nhật og:title
-      const ogTitleElement = document.querySelector('meta[property="og:title"]');
-      if (ogTitleElement) {
-        ogTitleElement.setAttribute("content", product.tensp);
-      }
+  //     // Cập nhật og:title
+  //     const ogTitleElement = document.querySelector('meta[property="og:title"]');
+  //     if (ogTitleElement) {
+  //       ogTitleElement.setAttribute("content", product.tensp);
+  //     }
   
-      // Cập nhật og:description
-      const ogDescriptionElement = document.querySelector('meta[property="og:description"]');
-      if (ogDescriptionElement) {
-        ogDescriptionElement.setAttribute("content", product.mota);
-      }
+  //     // Cập nhật og:description
+  //     const ogDescriptionElement = document.querySelector('meta[property="og:description"]');
+  //     if (ogDescriptionElement) {
+  //       ogDescriptionElement.setAttribute("content", product.mota);
+  //     }
   
-      const ogimageElement = document.querySelector('meta[property="og:image"]');
-      if (ogimageElement) {
-        ogimageElement.setAttribute("content", product.imgUrl);
-      }
-    }
-  }, [product]);
+  //     const ogimageElement = document.querySelector('meta[property="og:image"]');
+  //     if (ogimageElement) {
+  //       ogimageElement.setAttribute("content", product.imgUrl);
+  //     }
+  //   }
+  // }, [product]);
   const productUrl = window.location.href;
 
   const handleAddtocart = () => {
@@ -445,7 +446,18 @@ export default function Detail() {
   } else {
     return (
       <>
+      <Head>
+        <title>{`${product.tensp} - Vpp Phú Cường`}</title>
+        <meta name="description" content={product.mota} />
+        <meta property="og:title" content={product.tensp} />
+        <meta property="og:description" content={product.mota} />
+        <meta
+      property="og:image"
+      content={product.imgUrl}
+    />
+      </Head>
         <main class="detail-thuy">
+
           <section>
             <div class="container">
               <div class="row">
