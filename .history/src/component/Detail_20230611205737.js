@@ -481,13 +481,7 @@ export default function Detail() {
                   </div>
                 </div>
                 <div class="col-lg-5 col-md-12">
-                <MetaTags>
-        <title>{product.tensp} - Vpp Phú Cường</title>
-        <meta name="description" content={product.mota} />
-        <meta property="og:title" content={product.tensp} />
-        <meta property="og:description" content={product.mota} />
-        <meta property="og:image" content={product.imgUrl} />
-      </MetaTags>
+                 
 
                   <div class="title-info">
                     {product.thuonghieu && (
