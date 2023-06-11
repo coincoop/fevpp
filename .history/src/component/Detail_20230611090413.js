@@ -281,7 +281,7 @@ export default function Detail() {
     if(user!==null){
       for (let i = 0; i < makhArray.length; i++) {
 
-        const response = await axios.get(`${API_URL}account/${makhArray[i]}`, {
+        const response = await axios.get(`${API_URL}/account/${makhArray[i]}`, {
           headers: { token: accessToken }
         });
         tenkhs.push(response.data);
