@@ -297,7 +297,6 @@ export default function Detail() {
         setIsLoading(false);
       }
     }
-    return tenkhs;
   };
   
   const [rating, setRating] = useState(5);

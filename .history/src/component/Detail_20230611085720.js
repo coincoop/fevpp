@@ -278,24 +278,12 @@ export default function Detail() {
   const accessToken = user?.accessToken;
   const getTenkhByMakh = async (makhArray) => {
     const tenkhs = [];
-    if(user!==null){
-      for (let i = 0; i < makhArray.length; i++) {
-
-        const response = await axios.get(`${API_URL}/account/${makhArray[i]}`, {
-          headers: { token: accessToken }
-        });
-        tenkhs.push(response.data);
-        setIsLoading(false);
-      }
-    }else{
-      for (let i = 0; i < makhArray.length; i++) {
-
-        const response = await axios.get(`${API_URL}/account/tenkh/${makhArray[i]}`, {
-          headers: { token: accessToken }
-        });
-        tenkhs.push(response.data);
-        setIsLoading(false);
-      }
+    for (let i = 0; i < makhArray.length; i++) {
+      const response = await axios.get(`${API_URL}account/${makhArray[i]}`, {
+        headers: { token: accessToken },
+      });
+      tenkhs.push(response.data);
+      setIsLoading(false);
     }
     return tenkhs;
   };
