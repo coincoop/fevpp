@@ -6,7 +6,7 @@ import { useParams, Link } from "react-router-dom";
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
 import Currency from "./body/Currency";
-import { MetaTags } from "react-meta-tags";
+
 import { addProduct } from "../redux/slice";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../redux/apiRequest.js";
@@ -14,7 +14,7 @@ import {
   FacebookShareButton,
   TwitterShareButton,
   PinterestShareButton,
-  WhatsappShareButton,Quote
+  WhatsappShareButton
 } from "react-share";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -614,8 +614,8 @@ export default function Detail() {
                     <span>Chia sẻ: </span>
                     <ul>
                       <li className="facebook">
-                        <FacebookShareButton url={window.location.href} imageUrl={product.imgUrl}>
-                        <Quote text={product.tensp} />
+                        <FacebookShareButton url={window.location.href} imageUrl={product.imgUrl} quote={product.tensp}>
+                        
                           <i className="fa fa-facebook"></i>
                         </FacebookShareButton>
                       </li>
