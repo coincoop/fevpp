@@ -35,7 +35,7 @@ import EditCateProd from "./component/admin/EditCateProd";
 import EditReview from "./component/admin/EditReview";
 import AddContact from "./component/admin/AddContact";
 import BlogAll from "./component/BlogAll"
-
+import Payment from "./component/Payment"
 import { useSelector } from "react-redux";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 function Layout({ children }) {
@@ -75,6 +75,8 @@ function App() {
         <Route path="/account/cart" element={<Layout><AccountCart /></Layout>} />
         <Route path="/account/edit" element={<Layout><AccountEdit /></Layout>} />
         <Route path="/blog" element={<Layout><BlogAll/></Layout>}/>
+        <Route path="/payment" element={<Layout><Payment/></Layout>}/>
+
         <Route path="*" element={<Layout><NotFound /></Layout>} />
       </Routes>
 

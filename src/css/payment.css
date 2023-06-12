@@ -1,0 +1,23 @@
+.payment h1 {
+    color: #333;
+}
+
+.payment label {
+    display: block;
+    margin-top: 10px;
+}
+
+.payment input {
+    width: 100%;
+    padding: 5px;
+    margin-top: 5px;
+}
+
+.payment button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
