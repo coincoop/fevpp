@@ -248,8 +248,12 @@ function CategoryPage() {
     );
   };
   return (
+    <>
+    {record.length > 0 ? (
     <section class="product-thuy">
+      
       <div class="container">
+      
       <div class="filter-contain">
             <div class="dropdown rangeslider block-filsort">
               <span>Chọn mức giá phù hợp: </span>
@@ -489,7 +493,9 @@ function CategoryPage() {
               </a>
             </li>
           </ul>
+          
         </div>
+        
       <Modal
         isOpen={isModalOpen}
         onRequestClose={closeModal}
@@ -499,7 +505,14 @@ function CategoryPage() {
           <ModalContent product={selectedProduct} closeModal={closeModal} />
         )}
       </Modal>
+     
     </section>
+    ) : (
+      <div className="load">
+        <div >Hiện không có sản phẩm</div>
+      </div>
+    )}
+    </>
   );
 }
 

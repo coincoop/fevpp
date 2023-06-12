@@ -1029,6 +1029,10 @@ form .fieldSearch .search__button.fieldSearch__button,
   transition: all 0.2s;
   padding-left: 20px;
 }
+.hidden {
+  display: none;
+}
+
 
 .searchrs-contain li:hover {
   background-color: #e84f69;

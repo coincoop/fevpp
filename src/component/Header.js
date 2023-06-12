@@ -103,6 +103,7 @@ export default function Header() {
   const [navMenuActive, setNavMenuActive] = useState(
     Array(menus.length).fill(false)
   );
+  const [isNavContentVisible, setIsNavContentVisible] = useState(true);
 
   useEffect(() => {
     const getUserCart = async () => {
@@ -152,6 +153,9 @@ export default function Header() {
       })
     );
     setProducts(response.data.products);
+  };
+  const handleClickNav = () => {
+    setIsNavContentVisible(false);
   };
   const fetchMenus = async () => {
     const response = await axios.get(`${API_URL}`);
@@ -716,16 +720,17 @@ export default function Header() {
                                         key={childSubmenu.id}
                                       >
                                         <strong>
-                                          <Link
-                                            to={`/categories/${childSubmenu.url}`}
+                                          <a
+                                            href={`/categories/${childSubmenu.url}`}
                                             onClick={() =>
                                               clickChildSubmenu(
                                                 `/categories/${childSubmenu.url}`
                                               )
                                             }
+                                            
                                           >
                                             {childSubmenu.name}
-                                          </Link>
+                                          </a>
                                         </strong>
 
                                         {menus
@@ -735,9 +740,9 @@ export default function Header() {
                                               childSubmenu.id
                                           )
                                           .map((grandChildSubmenu) => (
-                                            <Link
+                                            <a
                                               key={grandChildSubmenu.id}
-                                              to={`/categories/${grandChildSubmenu.url}`}
+                                              href={`/categories/${grandChildSubmenu.url}`}
                                               onClick={() =>
                                                 clickGrandChildSubmenu(
                                                   `/categories/${grandChildSubmenu.url}`
@@ -745,7 +750,7 @@ export default function Header() {
                                               }
                                             >
                                               &#10148; {grandChildSubmenu.name}
-                                            </Link>
+                                            </a>
                                           ))}
                                       </div>
                                     ))}
@@ -788,7 +793,7 @@ export default function Header() {
                             )}
                             {submenus.length > 0 && (
                               <div
-                                className={`nav-content nav-content-thuy ${navMenuActive[index] ? "active" : ""
+                                className={`nav-content ${isNavContentVisible ? '' : 'hidden'} nav-content-thuy ${navMenuActive[index] ? "active" : ""
                                   }`}
 
                               >
