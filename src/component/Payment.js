@@ -7,24 +7,41 @@ import { API_URL } from "../config";
 
 export default function Product() {
     return (
-        <div className="payment">
-            <h1>Payment Details</h1>
-
-            <form className="payment" id="payment-form" method="post" action="/process-payment">
-                <label for="card-number">Card Number:</label>
-                <input type="text" id="card-number" name="card-number" required />
-
-                <label for="expiration-date">Expiration Date:</label>
-                <input type="text" id="expiration-date" name="expiration-date" required />
-
-                <label for="cvv">CVV:</label>
-                <input type="text" id="cvv" name="cvv" required />
-
-                <label for="name">Cardholder Name:</label>
-                <input type="text" id="name" name="name" required />
-
-                <button type="submit">Submit Payment</button>
-            </form>
-        </div>
+        <section className="payment">
+            <h1>Thanh toán sản phẩm</h1>
+            <div className="contain-prod">
+                <table className="table-prod">
+                    <tbody>
+                        <tr key={1}>
+                            <td>Stt</td>
+                            <td><img src={'../img/logo/trash-can.png'} alt="" /></td>
+                            <td>Tên sản phẩm</td>
+                            <td className="input-quantity">Sô lượng</td>
+                            <td className="thanhtien-thuy">Thanh tien</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div className="input-info">
+                <form >
+                    <div class="mb-3 mt-3">
+                        <label for="email" class="form-label">Email:</label>
+                        <input type="email" class="form-control" id="email" name="email"/>
+                    </div>
+                    <div class="mb-3">
+                        <label for="sdt" class="form-label">Số điện thoại</label>
+                        <input type="text" class="form-control" id="sdt" name="sdt"/>
+                    </div>
+                    <div class="mb-3">
+                        <label for="dc" class="form-label">Địa chỉ</label>
+                        <input type="text" class="form-control" id="dc" name="dc"/>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Thanh toán</button>
+                </form>
+            </div>
+            <div className="shipcost">
+                {/* ...developing */}
+            </div>
+        </section>
     )
 }
