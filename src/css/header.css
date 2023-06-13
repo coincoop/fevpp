@@ -987,7 +987,7 @@ form .fieldSearch .search__button.fieldSearch__button,
     min-width: 170px;
   }
   .contact-section {
-    padding-bottom: 60px !important;
+    padding-bottom: 80px !important;
   }
   .contact-section a .tel {
     width: 40px !important;
@@ -1029,6 +1029,10 @@ form .fieldSearch .search__button.fieldSearch__button,
   transition: all 0.2s;
   padding-left: 20px;
 }
+.hidden {
+  display: none;
+}
+
 
 .searchrs-contain li:hover {
   background-color: #e84f69;

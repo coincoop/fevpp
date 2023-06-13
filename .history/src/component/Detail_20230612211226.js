@@ -14,7 +14,7 @@ import {
   FacebookShareButton,
   TwitterShareButton,
   PinterestShareButton,
-  WhatsappShareButton,
+  WhatsappShareButton
 } from "react-share";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -185,6 +185,7 @@ export default function Detail() {
   useEffect(() => {
     getReview();
     fetchData();
+    
   }, [url]);
   const fetchData = async () => {
     try {
@@ -233,34 +234,26 @@ export default function Detail() {
       if (titleElement) {
         titleElement.textContent = `${product.tensp} - Vpp Phú Cường`;
       }
-
+  
       // Cập nhật description
-      const descriptionElement = document.querySelector(
-        'meta[name="description"]'
-      );
+      const descriptionElement = document.querySelector('meta[name="description"]');
       if (descriptionElement) {
         descriptionElement.setAttribute("content", `${product.mota}`);
       }
-
+  
       // Cập nhật og:title
-      const ogTitleElement = document.querySelector(
-        'meta[property="og:title"]'
-      );
+      const ogTitleElement = document.querySelector('meta[property="og:title"]');
       if (ogTitleElement) {
         ogTitleElement.setAttribute("content", product.tensp);
       }
-
+  
       // Cập nhật og:description
-      const ogDescriptionElement = document.querySelector(
-        'meta[property="og:description"]'
-      );
+      const ogDescriptionElement = document.querySelector('meta[property="og:description"]');
       if (ogDescriptionElement) {
         ogDescriptionElement.setAttribute("content", product.mota);
       }
-
-      const ogimageElement = document.querySelector(
-        'meta[property="og:image"]'
-      );
+  
+      const ogimageElement = document.querySelector('meta[property="og:image"]');
       if (ogimageElement) {
         ogimageElement.setAttribute("content", product.imgUrl);
       }
@@ -313,12 +306,13 @@ export default function Detail() {
   const [showFullContent, setShowFullContent] = useState(false);
 
   const handleDanhgiaClick = async () => {
+    
     try {
       const makh = user?.makh;
       const masp = product.id;
       const ratingVal = rating;
       const commentVal = comment;
-      if (commentVal !== "") {
+      if(commentVal !== ""){
         await axios.post(`${API_URL}review/add`, {
           makh,
           masp,
@@ -488,6 +482,8 @@ export default function Detail() {
                   </div>
                 </div>
                 <div class="col-lg-5 col-md-12">
+                
+
                   <div class="title-info">
                     {product.thuonghieu && (
                       <p>Thương hiệu: {product.thuonghieu}</p>
@@ -618,11 +614,8 @@ export default function Detail() {
                     <span>Chia sẻ: </span>
                     <ul>
                       <li className="facebook">
-                        <FacebookShareButton
-                          url={window.location.href}
-                          imageUrl={product.imgUrl}
-                          quote={product.tensp}
-                        >
+                        <FacebookShareButton url={window.location.href} imageUrl={product.imgUrl} quote={product.tensp}>
+                        
                           <i className="fa fa-facebook"></i>
                         </FacebookShareButton>
                       </li>
@@ -686,9 +679,9 @@ export default function Detail() {
                         re.noidung.length > 255 && !showFullContent
                           ? `${re.noidung.substring(0, 255)} ...`
                           : re.noidung;
-
-                      const isAdminReplied =
-                        re.reply !== null && re.reply !== "";
+                          
+                        
+                          const isAdminReplied = re.reply !== null && re.reply !== "";
                       return (
                         <div id="reviewsMsg">
                           <div class="review">
@@ -741,48 +734,51 @@ export default function Detail() {
                                 ""
                               )}
                             </div>
+                           
                           </div>
                           {isAdminReplied && (
-                            <div className="contaiAd">
-                              <div class="reviewAdmin">
-                                <div class="profileImg">
-                                  <img
-                                    src="https://cdn-icons-png.flaticon.com/256/1930/1930026.png"
-                                    alt="001-man-2.png"
-                                    border="0"
-                                  />
-                                </div>
-                                <div class="desc">
-                                  <p
-                                    style={{
-                                      color: "red",
-                                    }}
-                                    className="tenkh"
-                                  >
-                                    VPP Phú Cường
-                                  </p>
-                                  <p style={{ width: "80%" }}>{re.reply}</p>
-                                  {re.reply.length > 255 && (
-                                    <button
-                                      className="button-showmore"
-                                      onClick={() =>
-                                        setShowFullContent(!showFullContent)
-                                      }
-                                    >
-                                      {showFullContent ? "Rút gọn" : "Xem thêm"}
-                                    </button>
-                                  )}
-                                </div>
-                              </div>
-                            </div>
-                          )}
+          <div class="review">
+          <div class="profileImg">
+            <img
+              src="http://i.imgrpost.com/imgr/2017/09/04/001-man-2.png"
+              alt="001-man-2.png"
+              border="0"
+            />
+          </div>
+          <div class="desc">
+            <p
+              style={{
+                color:
+                  "red",
+              }}
+              className="tenkh"
+            >
+              VPP Phú Cường
+            </p>
+            <p style={{ width: "80%" }}>{re.reply}</p>
+            {re.reply.length > 255 && (
+              <button
+                className="button-showmore"
+                onClick={() =>
+                  setShowFullContent(!showFullContent)
+                }
+              >
+                {showFullContent ? "Rút gọn" : "Xem thêm"}
+              </button>
+            )}
+          </div>
+          
+          
+         
+        </div>
+        )}
                           <div style={{ height: "20px" }}></div>
                         </div>
                       );
                     })}
                     {paginaReview.length == 0 ? (
                       <div></div>
-                    ) : (
+                    ): (
                       <div className="">
                         <ul class="pagination justify-content-center">
                           <li
@@ -830,45 +826,48 @@ export default function Detail() {
                         </ul>
                       </div>
                     )}
-
-                    {user == null ? (
+                    
+                    
+                    {user ==null ? (
                       <div> lon dang nhap di r comment </div>
-                    ) : (
+                    ):(
                       <div>
-                        <div id="mid">
-                          <h4>Nhận xét của bạn về sản phẩm của chúng tôi</h4>
-                          {/* <input type="text"
+                      <div id="mid">
+                        <h4>Nhận xét của bạn về sản phẩm của chúng tôi</h4>
+                        {/* <input type="text"
                                                     value={comment}
                                                     onChange={(event) => {
                                                         const newValue = event.target.value;
                                                         setComment(newValue);
                                                     }} /><br /> */}
-                          <br />
-                          <textarea
-                            rows="5"
-                            cols="50"
-                            className="comment"
-                            value={comment}
-                            onChange={(event) => {
-                              const newValue = event.target.value;
-                              setComment(newValue);
+                        <br />
+                        <textarea
+                          rows="5"
+                          cols="50"
+                          className="comment"
+                          value={comment}
+                          onChange={(event) => {
+                            const newValue = event.target.value;
+                            setComment(newValue);
+                          }}
+                        ></textarea>
+                        <div id="btn">
+                          <Rating
+                            value={rating}
+                            onChange={(event, newValue) => {
+                              setRating(newValue);
                             }}
-                          ></textarea>
-                          <div id="btn">
-                            <Rating
-                              value={rating}
-                              onChange={(event, newValue) => {
-                                setRating(newValue);
-                              }}
-                            />
-                          </div>
+                          />
                         </div>
-                        <div id="foot">
-                          <button onClick={handleDanhgiaClick}>Đánh giá</button>
-                        </div>
-                        <div style={{ height: "50px" }}></div>
                       </div>
+                      <div id="foot">
+                        <button onClick={handleDanhgiaClick}>Đánh giá</button>
+                      </div>
+                      <div style={{ height: "50px" }}></div>
+                      
+                    </div>
                     )}
+                    
                   </div>
                 </div>
               </div>

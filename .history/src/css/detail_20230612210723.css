@@ -497,17 +497,9 @@
 .review > .desc > .tenkh {
   font-weight: 600;
   font-size: large;
-
 }
-
-.contaiAd {
-  display: flex;
-  justify-content: end;
-}
-.reviewAdmin {
-  margin-left: 30px;
-  
-  width: 80%;
+.review {
+  width: 95%;
   min-height: 50px;
   margin: 0 auto;
   background: #ecf0f1;
@@ -519,28 +511,28 @@
   border-radius: 0.3em;
 }
 
-.reviewAdmin > .profileImg {
+.review > .profileImg {
   height: inherit;
   display: flex;
   align-items: center;
 }
 
-.reviewAdmin > .profileImg > img {
+.review > .profileImg > img {
   height: 40px;
 }
 
-.reviewAdmin > .desc {
+.review > .desc {
   padding-left: 20px;
   width: 70%;
 }
 
-.reviewAdmin > .desc > p {
+.review > .desc > p {
   padding: 0;
   margin: 0;
   font-size: 12px;
 }
 
-.reviewAdmin > .desc > .tenkh {
+.review > .desc > .tenkh {
   font-weight: 600;
   font-size: large;
 }
