@@ -5,7 +5,7 @@ import {
   BookOutlined,
   LayoutOutlined,
   SmileOutlined,
-  PhoneOutlined,FundProjectionScreenOutlined
+  PhoneOutlined, FundProjectionScreenOutlined
 } from "@ant-design/icons";
 import { Layout, Menu, theme } from "antd";
 import React, { useState } from "react";
@@ -16,6 +16,7 @@ import ListBlog from "./ListBlog";
 import ListCateProd from "./ListCateProd";
 import ListReview from "./ListReview";
 import ListContact from "./ListContact";
+import ListHoadon from "./ListHoadon";
 import "../../css/AdLayout.css";
 import Dashboard from "./Dashboard";
 import { Helmet } from "react-helmet";
@@ -62,6 +63,7 @@ const AdLayout = () => {
             { key: "6", icon: <AppstoreOutlined />, label: "Phân loại" },
             { key: "7", icon: <SmileOutlined />, label: "Đánh giá" },
             { key: "8", icon: <PhoneOutlined />, label: "Liên hệ" },
+            { key: "9", icon: <BookOutlined />, label: "Hóa đơn" },
           ]}
         />
       </Sider>
@@ -85,6 +87,7 @@ const AdLayout = () => {
               { key: "6", label: "Phân loại" },
               { key: "7", label: "Đánh giá" },
               { key: "8", label: "Liên hệ" },
+              { key: "9", label: "Hóa đơn" },
             ]}
           />
         </Header>
@@ -105,10 +108,12 @@ const AdLayout = () => {
             <ListBlog />
           ) : selectedMenuItem === "6" ? (
             <ListCateProd />
-            ) : selectedMenuItem === "7" ? (
-              <ListReview />
-              ) : selectedMenuItem === "8" ? (
-                <ListContact />
+          ) : selectedMenuItem === "7" ? (
+            <ListReview />
+          ) : selectedMenuItem === "8" ? (
+            <ListContact />
+          ) : selectedMenuItem === "9" ? (
+            <ListHoadon />
           ) : null}
         </Content>
         <Footer

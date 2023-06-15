@@ -35,6 +35,7 @@ import EditCateProd from "./component/admin/EditCateProd";
 import EditReview from "./component/admin/EditReview";
 import AddContact from "./component/admin/AddContact";
 import BlogAll from "./component/BlogAll"
+import Payment from "./component/Payment";
 
 import { useSelector } from "react-redux";
 import { Helmet, HelmetProvider } from "react-helmet-async";
